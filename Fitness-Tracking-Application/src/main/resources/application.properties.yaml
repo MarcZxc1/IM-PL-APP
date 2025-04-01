@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Fitness Tracker API
+  description: API for the Fitness Tracker application.
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080' # Replace with your server URL
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getUsers
+      tags:
+        - Users
+      responses:
+        '200':
+          description: List of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    email:
+                      type: string
+  /users/{userId}:
+    get:
+      summary: Get a user by ID
+      operationId: getUserById
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          description: The ID of the user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+        '404':
+          description: User not found
+  /login/oauth2/code/google:
+    get:
+      summary: OAuth2 callback for Google login
+      operationId: googleOAuthCallback
+      tags:
+        - Authentication
+      responses:
+        '302':
+          description: Redirect to the home page after login
+        '401':
+          description: Unauthorized - Invalid Google OAuth2 callback
+  /fitness-tracker:
+    post:
+      summary: Log fitness activity
+      operationId: logFitnessActivity
+      tags:
+        - Fitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityType:
+                  type: string
+                duration:
+                  type: integer
+                caloriesBurned:
+                  type: integer
+      responses:
+        '201':
+          description: Activity logged successfully
+        '400':
+          description: Invalid input data

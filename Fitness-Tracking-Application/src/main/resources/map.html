@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout Map - CRUD Operations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body, html { margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100vw; }
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<button class="controls" onclick="clearMarkers()">Clear Markers</button>
+<div id="map"></div>
+
+<script>
+    // 🌍 Initialize the map
+    var map = L.map('map').setView([14.5995, 120.9842], 13);
+
+    // 🗺️ Load OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let markers = [];
+
+    // 🏋️‍♂️ Load workout locations from JavaFX or storage
+    function loadWorkouts(workouts) {
+        console.log("📍 Received workout locations:", workouts);
+
+        if (!Array.isArray(workouts)) {
+            console.error("❌ Invalid data format: Expected an array.", workouts);
+            alert("Invalid data received from server.");
+            return;
+        }
+
+        // ❌ Clear existing markers
+        clearMarkers();
+
+        // 🔥 Add new markers
+        workouts.forEach(workout => {
+            if (!workout || !workout.location || !Array.isArray(workout.location.coordinates) || workout.location.coordinates.length !== 2) {
+                console.error("⚠ Skipping invalid location:", workout);
+                return;
+            }
+
+            let [longitude, latitude] = workout.location.coordinates;
+            if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+                console.error("⚠ Invalid latitude or longitude:", workout);
+                return;
+            }
+
+            addMarker(latitude, longitude, workout.name);
+        });
+    }
+
+    // ➕ Create (Add) Markers
+    function addMarker(latitude, longitude, name = "New Workout") {
+        let marker = L.marker([latitude, longitude], { draggable: true }).addTo(map)
+            .bindPopup(getPopupContent(marker, name))
+            .on("popupopen", function () { attachPopupEvents(marker); });
+
+        markers.push(marker);
+    }
+
+    // 📖 Read (Display) Markers (Handled by `loadWorkouts`)
+
+    // ✏ Update (Modify) Marker
+    function updateMarker(marker, newName) {
+        marker.bindPopup(getPopupContent(marker, newName)).openPopup();
+    }
+
+    // ❌ Delete Marker
+    function deleteMarker(marker) {
+        map.removeLayer(marker);
+        markers = markers.filter(m => m !== marker);
+    }
+
+    // 🔄 Attach Edit & Delete Events to Popup
+    function attachPopupEvents(marker) {
+        document.getElementById(`edit-${marker._leaflet_id}`).addEventListener("click", function () {
+            let newName = prompt("Enter new workout name:", marker.getPopup().getContent().split("<br>")[0].replace("<b>", "").replace("</b>", ""));
+            if (newName) updateMarker(marker, newName);
+        });
+
+        document.getElementById(`delete-${marker._leaflet_id}`).addEventListener("click", function () {
+            deleteMarker(marker);
+        });
+    }
+
+    // 🏷️ Popup Content with Edit & Delete Buttons
+    function getPopupContent(marker, name) {
+        return `<b>${name}</b><br>Lat: ${marker.getLatLng().lat.toFixed(5)}, Lng: ${marker.getLatLng().lng.toFixed(5)}<br>
+                <button id="edit-${marker._leaflet_id}">✏ Edit</button>
+                <button id="delete-${marker._leaflet_id}">❌ Delete</button>`;
+    }
+
+    // ➕ Click on the map to add a marker
+    map.on('click', function (e) {
+        let latitude = e.latlng.lat;
+        let longitude = e.latlng.lng;
+        let locationName = prompt("Enter workout name:");
+        if (!locationName) return;
+        addMarker(latitude, longitude, locationName);
+    });
+
+    // 🧹 Clear all markers
+    function clearMarkers() {
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+    }
+</script>
+
+</body>
+</html>

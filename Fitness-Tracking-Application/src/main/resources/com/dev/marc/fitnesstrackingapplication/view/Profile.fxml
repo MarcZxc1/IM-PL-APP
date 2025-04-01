@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.ArcType?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneContainer" prefHeight="680.0" prefWidth="1250.0"
+            styleClass="Profile-Page" stylesheets="@../../../../../style.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+   <children>
+      <Button layoutX="43.0" layoutY="40.0" mnemonicParsing="false"
+              onAction="#HOME" text="Home" />
+
+      <!-- Progress Arc -->
+      <Arc fx:id="progressArc" layoutX="818.0" layoutY="319.0"
+           radiusX="100.0" radiusY="100.0"
+           startAngle="90" length="0"
+           type="OPEN" stroke="white" strokeWidth="15" fill="transparent"/>
+
+      <!-- Progress Bar -->
+      <ProgressBar fx:id="progressBar" layoutX="718.0" layoutY="219.0"
+                   prefWidth="200.0" progress="0.0" />
+
+      <!-- Percentage Label -->
+      <Label fx:id="percentageLabel" layoutX="807.0" layoutY="250.0"
+             text="0%" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
