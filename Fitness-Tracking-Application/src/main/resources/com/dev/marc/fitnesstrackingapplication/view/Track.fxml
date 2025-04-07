@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +18,7 @@
       <Button fx:id="toDashboard" layoutX="44.0" layoutY="48.0" mnemonicParsing="false" onAction="#homeButton" text="BACK" />
 
       <!-- Added GridPane for Geospatial Queries -->
-      <GridPane layoutX="500.0" layoutY="150.0">
+      <GridPane layoutX="447.0" layoutY="136.0">
          <children>
             <Label text="Longitude:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <TextField fx:id="longitudeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -28,8 +30,8 @@
             <TextField fx:id="distanceField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
             <Button onAction="#fetchNearbyWorkouts" text="Find Nearby Workouts" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <TextArea fx:id="resultArea" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      
+            <TextArea fx:id="resultArea" prefHeight="67.0" prefWidth="354.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          </children>
          <columnConstraints>
             <ColumnConstraints />
@@ -43,10 +45,20 @@
             <RowConstraints />
          </rowConstraints>
       </GridPane>
-      <WebView fx:id="mapWebView" layoutX="44.0" layoutY="135.0" prefHeight="386.0" prefWidth="377.0" />
-      <Button fx:id="loginButton" layoutX="1040.0" layoutY="104.0" mnemonicParsing="false" onAction="#loginWithStrava" text="Button" />
+      <WebView fx:id="mapWebView" layoutX="44.0" layoutY="90.0" prefHeight="386.0" prefWidth="377.0" />
+      <Button fx:id="loginButton" layoutX="1055.0" layoutY="90.0" mnemonicParsing="false" onAction="#loginWithStrava" text="Button" />
       <Label fx:id="stepsLabel" layoutX="1060.0" layoutY="242.0" text="0%" />
-      <Label fx:id="heartRateLabel" layoutX="1060.0" layoutY="296.0" text="Heart Rate: 0" />
-      <Button layoutX="1060.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleFetchActivities" text="fetch" />
+      <Label fx:id="heartRateLabel" layoutX="1095.0" layoutY="186.0" text="Heart Rate: 0" />
+      <Button layoutX="973.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleFetchActivities" text="fetch" />
+<!--      layoutX="429.0" layoutY="393.0"-->
+
+      <TableView fx:id="tableView" layoutX="429.0" layoutY="393.0" prefHeight="400.0" prefWidth="542.0">
+         <columns>
+            <TableColumn fx:id="workoutNameColumn" text="Workout Name" />
+            <TableColumn fx:id="distanceColumn" prefWidth="157.0" text="Distance (m)" />
+            <TableColumn fx:id="locationColumn" prefWidth="114.0" text="Location" />
+            <TableColumn fx:id="workoutTypeColumn" prefWidth="190.0" text="Workout Type" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

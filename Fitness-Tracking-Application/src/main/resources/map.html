@@ -2,16 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Workout Map - CRUD Operations</title>
+    <title>Workout Map with Tracks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Leaflet CSS & JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    <!-- Polyline decoder -->
+    <script src="https://unpkg.com/@mapbox/polyline"></script>
+
     <style>
-        body, html { margin: 0; padding: 0; }
-        #map { height: 100vh; width: 100vw; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+
         .controls {
             position: absolute;
             top: 10px;
@@ -19,115 +31,139 @@
             transform: translateX(-50%);
             z-index: 1000;
             background: white;
-            padding: 8px 12px;
-            cursor: pointer;
+            padding: 10px 16px;
             font-size: 14px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            border: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .controls:hover {
+            background-color: #f1f1f1;
         }
     </style>
 </head>
 <body>
 
-<button class="controls" onclick="clearMarkers()">Clear Markers</button>
+<!-- 🧹 Clear All Markers Button -->
+<button class="controls" onclick="clearMarkers()">🧹 Clear All</button>
+
+<!-- 🌍 Map Container -->
 <div id="map"></div>
 
 <script>
-    // 🌍 Initialize the map
-    var map = L.map('map').setView([14.5995, 120.9842], 13);
+    const map = L.map('map').setView([14.5995, 120.9842], 13);
 
-    // 🗺️ Load OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
     let markers = [];
+    let polylines = [];
 
-    // 🏋️‍♂️ Load workout locations from JavaFX or storage
     function loadWorkouts(workouts) {
-        console.log("📍 Received workout locations:", workouts);
+        console.log("📥 Loading workouts:", workouts);
 
         if (!Array.isArray(workouts)) {
-            console.error("❌ Invalid data format: Expected an array.", workouts);
-            alert("Invalid data received from server.");
+            console.error("❌ Invalid data format. Expected an array.");
+            alert("Error loading workouts.");
             return;
         }
 
-        // ❌ Clear existing markers
         clearMarkers();
 
-        // 🔥 Add new markers
         workouts.forEach(workout => {
-            if (!workout || !workout.location || !Array.isArray(workout.location.coordinates) || workout.location.coordinates.length !== 2) {
-                console.error("⚠ Skipping invalid location:", workout);
-                return;
+            const coords = workout?.location?.coordinates;
+            if (Array.isArray(coords) && coords.length === 2) {
+                const [lng, lat] = coords;
+                addMarker(lat, lng, workout.name || "Workout");
+            } else {
+                console.warn("⚠ Invalid coordinates skipped:", workout);
             }
-
-            let [longitude, latitude] = workout.location.coordinates;
-            if (typeof latitude !== 'number' || typeof longitude !== 'number') {
-                console.error("⚠ Invalid latitude or longitude:", workout);
-                return;
-            }
-
-            addMarker(latitude, longitude, workout.name);
         });
     }
 
-    // ➕ Create (Add) Markers
-    function addMarker(latitude, longitude, name = "New Workout") {
-        let marker = L.marker([latitude, longitude], { draggable: true }).addTo(map)
+    function addMarker(lat, lng, name = "Workout") {
+        const marker = L.marker([lat, lng], { draggable: true }).addTo(map)
             .bindPopup(getPopupContent(marker, name))
-            .on("popupopen", function () { attachPopupEvents(marker); });
+            .on('popupopen', () => attachPopupEvents(marker));
 
         markers.push(marker);
     }
 
-    // 📖 Read (Display) Markers (Handled by `loadWorkouts`)
-
-    // ✏ Update (Modify) Marker
     function updateMarker(marker, newName) {
         marker.bindPopup(getPopupContent(marker, newName)).openPopup();
     }
 
-    // ❌ Delete Marker
     function deleteMarker(marker) {
         map.removeLayer(marker);
         markers = markers.filter(m => m !== marker);
     }
 
-    // 🔄 Attach Edit & Delete Events to Popup
-    function attachPopupEvents(marker) {
-        document.getElementById(`edit-${marker._leaflet_id}`).addEventListener("click", function () {
-            let newName = prompt("Enter new workout name:", marker.getPopup().getContent().split("<br>")[0].replace("<b>", "").replace("</b>", ""));
-            if (newName) updateMarker(marker, newName);
-        });
-
-        document.getElementById(`delete-${marker._leaflet_id}`).addEventListener("click", function () {
-            deleteMarker(marker);
-        });
-    }
-
-    // 🏷️ Popup Content with Edit & Delete Buttons
     function getPopupContent(marker, name) {
-        return `<b>${name}</b><br>Lat: ${marker.getLatLng().lat.toFixed(5)}, Lng: ${marker.getLatLng().lng.toFixed(5)}<br>
-                <button id="edit-${marker._leaflet_id}">✏ Edit</button>
-                <button id="delete-${marker._leaflet_id}">❌ Delete</button>`;
+        const id = marker._leaflet_id;
+        const lat = marker.getLatLng().lat.toFixed(5);
+        const lng = marker.getLatLng().lng.toFixed(5);
+        return `
+            <b>${name}</b><br>
+            Lat: ${lat}, Lng: ${lng}<br>
+            <button id="edit-${id}">✏ Edit</button>
+            <button id="delete-${id}">🗑 Delete</button>
+        `;
     }
 
-    // ➕ Click on the map to add a marker
-    map.on('click', function (e) {
-        let latitude = e.latlng.lat;
-        let longitude = e.latlng.lng;
-        let locationName = prompt("Enter workout name:");
-        if (!locationName) return;
-        addMarker(latitude, longitude, locationName);
-    });
+    function attachPopupEvents(marker) {
+        const id = marker._leaflet_id;
 
-    // 🧹 Clear all markers
+        document.getElementById(`edit-${id}`).addEventListener("click", () => {
+            const currentName = marker.getPopup().getContent().match(/<b>(.*?)<\/b>/)?.[1] || "";
+            const newName = prompt("Enter new workout name:", currentName);
+            if (newName?.trim()) {
+                updateMarker(marker, newName.trim());
+            }
+        });
+
+        document.getElementById(`delete-${id}`).addEventListener("click", () => {
+            if (confirm("Are you sure you want to delete this marker?")) {
+                deleteMarker(marker);
+            }
+        });
+    }
+
     function clearMarkers() {
         markers.forEach(marker => map.removeLayer(marker));
         markers = [];
+
+        polylines.forEach(line => map.removeLayer(line));
+        polylines = [];
     }
+
+    // ✅ Function to load Strava polyline tracks
+    function loadStravaTracks(activities) {
+        console.log("📈 Loading Strava tracks...", activities);
+
+        activities.forEach(activity => {
+            try {
+                const coords = polyline.decode(activity.polyline);
+                const latLngs = coords.map(c => [c[0], c[1]]);
+                const line = L.polyline(latLngs, { color: 'blue' }).addTo(map)
+                    .bindPopup(activity.name || "Strava Activity");
+
+                polylines.push(line);
+            } catch (e) {
+                console.error("❌ Failed to decode polyline:", activity, e);
+            }
+        });
+    }
+
+    // 🖱️ Click to add marker
+    map.on('click', e => {
+        const name = prompt("Enter workout name:");
+        if (name?.trim()) {
+            addMarker(e.latlng.lat, e.latlng.lng, name.trim());
+        }
+    });
 </script>
 
 </body>
