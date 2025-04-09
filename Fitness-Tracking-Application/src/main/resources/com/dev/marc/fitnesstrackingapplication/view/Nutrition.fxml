@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <!-- Left Sidebar Navigation - Match with settings and sidebar -->
+   <left>
+      <VBox style="-fx-background-color: #3B7B7B; -fx-padding: 20; -fx-spacing: 15;" prefWidth="200">
+         <ToggleButton fx:id="dashboardButton" text="  Dashboard" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="profileButton" text="  Profile" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="nutritionButton" text="  Nutrition" selected="true" style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="workoutButton" text="  Workout / Goal" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="fitnessMetricButton" text="  Fitness Metric" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="reminderButton" text="  Reminder" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
+         <ToggleButton fx:id="reportButton" text="  Report" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
 
+         <VBox VBox.vgrow="ALWAYS" />
 
-<AnchorPane prefHeight="680.0" prefWidth="1280.0" styleClass="Nutrition-Page" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.NutritionController">
-   <children>
-      <Button layoutX="34.0" layoutY="34.0" mnemonicParsing="false" onAction="#HOME" text="home" />
-   </children>
-</AnchorPane>
+         <ToggleButton fx:id="settingsButton" text="  Settings" style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-alignment: CENTER_LEFT;" />
+         <Button text="  Log out" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7;-fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+      </VBox>
+   </left>
+
+   <!-- Main Content Area (Nutrition Section) -->
+   <center>
+      <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #E2F1E7;">
+         <!-- Title -->
+         <Text text="Nutrition" style="-fx-font-size: 24pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" />
+
+         <!-- Input Meal Section -->
+         <VBox spacing="10" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 15;">
+            <Text text="Input Meal" style="-fx-font-size: 18pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" />
+
+            <GridPane hgap="10" vgap="10">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" prefWidth="100" />
+                  <ColumnConstraints hgrow="ALWAYS" prefWidth="200" />
+               </columnConstraints>
+
+               <Label text="Meal Name:" style="-fx-text-fill: #1E2F38;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+               <TextField fx:id="mealNameField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-width: 200;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+               <Label text="Date:" style="-fx-text-fill: #1E2F38;" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+               <TextField fx:id="mealDateField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-width: 200;" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+               <Label text="Description:" style="-fx-text-fill: #1E2F38;" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+               <TextArea fx:id="mealDescriptionField" wrapText="true" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-height: 80; -fx-pref-width: 200;" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            </GridPane>
+
+            <Button text="Save" fx:id="saveButton" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 100; -fx-pref-height: 30; -fx-background-radius: 5;" />
+         </VBox>
+
+         <!-- Meal Suggestions Section -->
+         <VBox spacing="10">
+            <Text text="Meal Suggestions" style="-fx-font-size: 18pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" />
+
+            <HBox spacing="20">
+               <!-- Meal Suggestion 1 -->
+               <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
+                  <Text text="Meal Suggestion" style="-fx-font-weight: bold; -fx-fill: #1E2F38;" />
+                  <Text text="Chicken Broccoli" style="-fx-fill: #1E2F38;" />
+                  <ImageView fx:id="mealImage1" fitWidth="150" fitHeight="150" style="-fx-background-color: #e9ecef;" />
+               </VBox>
+
+               <!-- Meal Suggestion 2 -->
+               <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
+                  <Text text="Meal Suggestion" style="-fx-font-weight: bold; -fx-fill: #1E2F38;" />
+                  <Text text="Chicken Breast" style="-fx-fill: #1E2F38;" />
+                  <ImageView fx:id="mealImage2" fitWidth="150" fitHeight="150" style="-fx-background-color: #e9ecef;" />
+               </VBox>
+
+               <!-- Meal Suggestion 3 -->
+               <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
+                  <Text text="Meal Suggestion" style="-fx-font-weight: bold; -fx-fill: #1E2F38;" />
+                  <Text text="Dhungani" style="-fx-fill: #1E2F38;" />
+                  <ImageView fx:id="mealImage3" fitWidth="150" fitHeight="150" style="-fx-background-color: #e9ecef;" />
+               </VBox>
+            </HBox>
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

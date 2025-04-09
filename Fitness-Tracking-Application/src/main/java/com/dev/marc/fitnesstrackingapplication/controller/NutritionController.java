@@ -1,48 +1,53 @@
 package com.dev.marc.fitnesstrackingapplication.controller;
 
-import com.dev.marc.fitnesstrackingapplication.utils.TabSwitch;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class NutritionController {
 
-	ProfileController profileController = new ProfileController();
+	@FXML private TextField mealNameField;
+	@FXML private TextField mealDateField;
+	@FXML private TextArea mealDescriptionField;
+	@FXML private TextField proteinField;
+	@FXML private TextField caloriesField;
+	@FXML private Button saveButton;
+	@FXML private ImageView mealImage1;
+	@FXML private ImageView mealImage2;
+	@FXML private ImageView mealImage3;
 
-	@FXML
-	AnchorPane paneContainer;
-
-	private static String VIEW_PATH = "/com/dev/marc/fitnesstrackingapplication/view/";
-
-	public void setPaneContainer(AnchorPane paneContainer) {
-		this.paneContainer = paneContainer;
+	public void initialize() {
+		// Initialize any default values or event handlers here
+		saveButton.setOnAction(event -> saveMeal());
 	}
 
-	public void switchToNutrition(ActionEvent event) throws IOException {
-		TabSwitch.switchTab(paneContainer,VIEW_PATH + "Nutrition.fxml",
-				1250, 680, false);
+	private void saveMeal() {
+		// Handle saving the meal information
+		String mealName = mealNameField.getText();
+		String mealDate = mealDateField.getText();
+		String description = mealDescriptionField.getText();
+		String protein = proteinField.getText();
+		String calories = caloriesField.getText();
 
+		// Here you would typically save to a database or file
+		System.out.println("Meal saved: " + mealName);
+
+		// Clear fields after saving
+		mealNameField.clear();
+		mealDateField.clear();
+		mealDescriptionField.clear();
+		proteinField.clear();
+		caloriesField.clear();
 	}
 
-
-
-	@FXML
-	public void HOME(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_PATH + "Dashboard.fxml"));
-		Parent root = loader.load();
-
-		// Get the current scene and update it
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(new Scene(root, 1250, 680));
-		stage.show();
+	// Method to update meal images (to be called later when you implement image upload)
+	public void updateMealImage(ImageView imageView, String imagePath) {
+		try {
+			Image image = new Image(getClass().getResourceAsStream(imagePath));
+			imageView.setImage(image);
+		} catch (Exception e) {
+			System.err.println("Error loading image: " + e.getMessage());
+		}
 	}
-
-
 }

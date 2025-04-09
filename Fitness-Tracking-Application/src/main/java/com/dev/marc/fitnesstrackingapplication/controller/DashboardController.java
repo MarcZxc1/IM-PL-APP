@@ -4,73 +4,70 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Arc;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-@Controller
 public class DashboardController {
 
-	@FXML private ProgressBar progressBar;
-	@FXML private Arc progressArc;  // 🔹 Now properly linked
-	@FXML private Label percentageLabel;
-
-
-	@FXML private Button TrackBtn;
-
-	@FXML private Button WaGBtn;
-
-	@FXML private Button homeButton;
-
-	ProfileController profileController = new ProfileController();
-	private RestTemplate RestTemplate;
-	MapController mapController = new MapController();
-	WorkoutAndGoalsController workoutAndGoalsController = new WorkoutAndGoalsController();
-	NutritionController nutritionController = new NutritionController();
-	RegisterController registerController = new RegisterController();
+	@FXML
+	private ProgressBar progressBar;
+	@FXML
+	private Arc progressArc;
+	@FXML
+	private Label percentageLabel;
 
 	@FXML
-	AnchorPane paneContainer;
+	private Button TrackBtn;
+	@FXML
+	private Button WaGBtn;
+	@FXML
+	private Button homeButton;
 
-	public void setPaneContainer(AnchorPane paneContainer) {
-		this.paneContainer = paneContainer;
-	}
+	@FXML
+	private AnchorPane paneContainer;
 
 	private double progress = 0;
 
+	@FXML
+	private Label labell;
+	@FXML
+	private Arc progressArc1;
+	@FXML
+	private Arc progressArc2;
+	@FXML
+	private Arc progressArc3;
+	@FXML
+	private Arc progressArc4;
 
-	@FXML private Label labell;
-
-	@FXML private Arc progressArc1;
-	@FXML private Arc progressArc2;
-	@FXML private Arc progressArc3;
-	@FXML private Arc progressArc4;
-
-	// ✅ Labels for each progress arc
-	@FXML private Label label1;
-	@FXML private Label label2;
-	@FXML private Label label3;
-	@FXML private Label label4;
+	@FXML
+	private Label label1;
+	@FXML
+	private Label label2;
+	@FXML
+	private Label label3;
+	@FXML
+	private Label label4;
 
 	public void initialize() {
-		// ✅ Initialize Arcs to start at 90 degrees
 		initializeArcs();
 
-		// ✅ Animate progress
 		Timeline timeline = new Timeline(
 				new KeyFrame(Duration.seconds(0.05), e -> updateProgress())
 		);
-		timeline.setCycleCount(100); // Run for 100 updates
+		timeline.setCycleCount(100);
 		timeline.play();
+
 		applyTypingEffect(labell, "Welcome to Fitness Tracker");
 	}
 
@@ -84,11 +81,7 @@ public class DashboardController {
 	private void updateProgress() {
 		if (progress < 100) {
 			progress += 1;
-
-			// ✅ Update the ProgressBar
 			progressBar.setProgress(progress / 100);
-
-			// ✅ Update Each Progress Arc Dynamically
 			updateArc(progressArc1, label1);
 			updateArc(progressArc2, label2);
 			updateArc(progressArc3, label3);
@@ -98,50 +91,45 @@ public class DashboardController {
 
 	private void updateArc(Arc arc, Label label) {
 		if (arc != null) {
-			arc.setLength(-progress * 3.6); // Convert 100% to 360 degrees
+			arc.setLength(-progress * 3.6);
 		}
 		if (label != null) {
 			label.setText((int) progress + "%");
 		}
 	}
 
-
-
 	@FXML
 	public void goToProfile(ActionEvent event) throws IOException {
-		profileController.setPaneContainer(paneContainer);
-		profileController.goToProfile(event);
+		loadScene("/path/to/Profile.fxml", event);
 	}
 
 	@FXML
 	public void goToTrack(ActionEvent event) throws IOException {
-		mapController.setPaneContainer(paneContainer);
-		mapController.goToMap(event);
+		loadScene("/path/to/Map.fxml", event);
 	}
 
 	@FXML
-	public void goToWorkoutGoals(ActionEvent event) throws IOException{
-		workoutAndGoalsController.setPaneContainer(paneContainer);
-		workoutAndGoalsController.switchToWaG(event);
+	public void goToWorkoutGoals(ActionEvent event) throws IOException {
+		loadScene("/path/to/WorkoutGoals.fxml", event);
 	}
 
 	@FXML
 	public void goToNutrition(ActionEvent event) throws IOException {
-		nutritionController.setPaneContainer(paneContainer);
-		nutritionController.switchToNutrition(event);
+		loadScene("/path/to/Nutrition.fxml", event);
 	}
 
 	@FXML
 	public void toRegister(ActionEvent event) throws IOException {
-		registerController.setPaneContainer(paneContainer);
-		registerController.toRegister(event);
+		loadScene("/path/to/Register.fxml", event);
 	}
 
-//	@FXML
-//	public void goToMap(ActionEvent event) throws IOException {
-//		mapController.setPaneContainer(paneContainer);
-//		mapController.switchToMap1(event);
-//	}
+	private void loadScene(String fxmlPath, ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+		Parent root = loader.load();
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(new Scene(root));
+		stage.show();
+	}
 
 	public static void applyTypingEffect(Label labell, String text) {
 		final StringBuilder displayedText = new StringBuilder();
@@ -155,7 +143,7 @@ public class DashboardController {
 		);
 		timeline.setCycleCount(text.length());
 		timeline.play();
-	}
 
+	}
 
 }

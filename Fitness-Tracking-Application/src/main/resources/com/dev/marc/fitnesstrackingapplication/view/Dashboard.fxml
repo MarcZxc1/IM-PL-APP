@@ -1,55 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Arc?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1250.0" styleClass="DashboardPane" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.DashboardController">
+<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1250.0"
+            style="-fx-background-color: #E2F1E7;"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dev.marc.fitnesstrackingapplication.controller.DashboardController">
+
    <children>
-      <Button fx:id="WaGBtn" layoutX="20.0" layoutY="253.0" mnemonicParsing="false" onAction="#goToWorkoutGoals" stylesheets="@../../../../../style.css" text="Workout and Goals" />
-      <Button fx:id="TrackBtn" layoutX="26.0" layoutY="172.0" mnemonicParsing="false" onAction="#goToTrack" stylesheets="@../../../../../style.css" text="Tracker" />
-      <Button layoutX="26.0" layoutY="94.0" mnemonicParsing="false" onAction="#goToProfile" stylesheets="@../../../../../style.css" text="Profile" />
-      <Button layoutX="26.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToNutrition" text="Nutrition" />
-      <Pane layoutX="234.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0" styleClass="Pane1" stylesheets="@../../../../../style.css">
+
+      <!-- Sidebar Buttons (Updated to Match Reminder/Settings Style) -->
+      <VBox layoutX="0.0" layoutY="0.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #3B7B7B; -fx-padding: 20;">
          <children>
-            <Arc fx:id="progressArc1" fill="transparent" layoutX="99.0" layoutY="98.0" length="0" radiusX="100.0" radiusY="100.0" startAngle="90" stroke="white" strokeWidth="15" type="OPEN" />
-            <Label fx:id="label1" layoutX="93.0" layoutY="21.0" text="0%" />
-         </children></Pane>
-      <Pane layoutX="472.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0" styleClass="Pane2" stylesheets="@../../../../../style.css">
+            <ToggleButton fx:id="dashboardButton" text="  Dashboard" selected="true"
+                          style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="profileButton" text="  Profile"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="nutritionButton" text="  Nutrition"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="workoutButton" text="  Workout / Goal"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="fitnessMetricButton" text="  Fitness Metric"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="reminderButton" text="  Reminder"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <ToggleButton fx:id="reportButton" text="  Report"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <VBox VBox.vgrow="ALWAYS" />
+            <ToggleButton fx:id="settingsButton" text="  Settings"
+                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+            <Button text="  Log out"
+                    style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" />
+         </children>
+      </VBox>
+
+      <!-- Circle Progress Panes -->
+      <Pane layoutX="234.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0"
+            style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 10; -fx-border-width: 2;">
          <children>
-            <Arc fx:id="progressArc2" fill="transparent" layoutX="85.0" layoutY="87.0" length="0" radiusX="100.0" radiusY="100.0" startAngle="90" stroke="white" strokeWidth="15" type="OPEN" />
-            <Label fx:id="label2" layoutX="86.0" layoutY="24.0" text="0%" />
-         </children></Pane>
-      <Pane layoutX="752.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0" styleClass="Pane3" stylesheets="@../../../../../style.css">
+            <Arc fx:id="progressArc1" fill="transparent" layoutX="99.0" layoutY="98.0" length="0"
+                 radiusX="100.0" radiusY="100.0" startAngle="90" stroke="#3B7B7B" strokeWidth="15" type="OPEN" />
+            <Label fx:id="label1" layoutX="93.0" layoutY="21.0" text="0%"
+                   style="-fx-text-fill: #1E2F38; -fx-font-weight: bold;" />
+         </children>
+      </Pane>
+
+      <Pane layoutX="472.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0"
+            style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 10; -fx-border-width: 2;">
          <children>
-            <Arc fx:id="progressArc3" fill="transparent" layoutX="97.0" layoutY="99.0" length="0" radiusX="100.0" radiusY="100.0" startAngle="90" stroke="white" strokeWidth="15" type="OPEN" />
-            <Label fx:id="label3" layoutX="90.0" layoutY="31.0" text="0%" />
-         </children></Pane>
-      <Pane layoutX="996.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0" styleClass="Pane4" stylesheets="@../../../../../style.css">
+            <Arc fx:id="progressArc2" fill="transparent" layoutX="85.0" layoutY="87.0" length="0"
+                 radiusX="100.0" radiusY="100.0" startAngle="90" stroke="#639A8F" strokeWidth="15" type="OPEN" />
+            <Label fx:id="label2" layoutX="86.0" layoutY="24.0" text="0%"
+                   style="-fx-text-fill: #1E2F38; -fx-font-weight: bold;" />
+         </children>
+      </Pane>
+
+      <Pane layoutX="752.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0"
+            style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 10; -fx-border-width: 2;">
          <children>
-            <Arc fx:id="progressArc4" fill="transparent" layoutX="93.0" layoutY="85.0" length="0" radiusX="100.0" radiusY="100.0" startAngle="90" stroke="white" strokeWidth="15" type="OPEN" />
-            <Label fx:id="label4" layoutX="86.0" layoutY="27.0" text="0%" />
-         </children></Pane>
-      <BarChart layoutX="234.0" layoutY="253.0" prefHeight="267.0" prefWidth="301.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
+            <Arc fx:id="progressArc3" fill="transparent" layoutX="97.0" layoutY="99.0" length="0"
+                 radiusX="100.0" radiusY="100.0" startAngle="90" stroke="#3B7B7B" strokeWidth="15" type="OPEN" />
+            <Label fx:id="label3" layoutX="90.0" layoutY="31.0" text="0%"
+                   style="-fx-text-fill: #1E2F38; -fx-font-weight: bold;" />
+         </children>
+      </Pane>
+
+      <Pane layoutX="996.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0"
+            style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 10; -fx-border-width: 2;">
+         <children>
+            <Arc fx:id="progressArc4" fill="transparent" layoutX="93.0" layoutY="85.0" length="0"
+                 radiusX="100.0" radiusY="100.0" startAngle="90" stroke="#639A8F" strokeWidth="15" type="OPEN" />
+            <Label fx:id="label4" layoutX="86.0" layoutY="27.0" text="0%"
+                   style="-fx-text-fill: #1E2F38; -fx-font-weight: bold;" />
+         </children>
+      </Pane>
+
+      <!-- Charts -->
+      <BarChart layoutX="234.0" layoutY="253.0" prefHeight="267.0" prefWidth="301.0"
+                style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-width: 2;" >
+         <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+         <yAxis><NumberAxis side="LEFT" /></yAxis>
       </BarChart>
-      <PieChart layoutX="702.0" layoutY="261.0" prefHeight="252.0" prefWidth="301.0" />
-      <Pane layoutX="251.0" layoutY="530.0" prefHeight="101.0" prefWidth="268.0" styleClass="Pane5" stylesheets="@../../../../../style.css" />
-      <Pane layoutX="555.0" layoutY="530.0" prefHeight="101.0" prefWidth="310.0" styleClass="Pane6" />
-      <Pane layoutX="895.0" layoutY="530.0" prefHeight="101.0" prefWidth="301.0" styleClass="Pane7" stylesheets="@../../../../../style.css" />
-      <ProgressBar fx:id="progressBar" layoutX="672.0" layoutY="23.0" prefWidth="200.0" progress="0.0" />
-      <Label fx:id="labell" layoutX="378.0" layoutY="15.0" prefHeight="17.0" prefWidth="258.0" stylesheets="@../../../../../style.css" text="I AMMMMMM THE NYOINK" />
+
+      <PieChart layoutX="702.0" layoutY="261.0" prefHeight="252.0" prefWidth="301.0"
+                style="-fx-border-color: #3B7B7B; -fx-border-width: 2;" />
+
+      <!-- Bottom Info Panels -->
+      <Pane layoutX="251.0" layoutY="530.0" prefHeight="101.0" prefWidth="268.0"
+            style="-fx-background-color: #FFFFFF; -fx-border-color: #3B7B7B; -fx-border-radius: 6; -fx-border-width: 1;" />
+      <Pane layoutX="555.0" layoutY="530.0" prefHeight="101.0" prefWidth="310.0"
+            style="-fx-background-color: #FFFFFF; -fx-border-color: #639A8F; -fx-border-radius: 6; -fx-border-width: 1;" />
+      <Pane layoutX="895.0" layoutY="530.0" prefHeight="101.0" prefWidth="301.0"
+            style="-fx-background-color: #FFFFFF; -fx-border-color: #3B7B7B; -fx-border-radius: 6; -fx-border-width: 1;" />
+
+      <!-- Progress Bar -->
+      <ProgressBar fx:id="progressBar" layoutX="672.0" layoutY="23.0" prefWidth="200.0" progress="0.0"
+                   style="-fx-accent: #639A8F;" />
+
+      <!-- Header Label -->
+      <Label fx:id="labell" layoutX="378.0" layoutY="15.0" prefHeight="17.0" prefWidth="258.0"
+             text="I AMMMMMM THE NYOINK"
+             style="-fx-font-size: 16px; -fx-text-fill: #1E2F38; -fx-font-weight: bold;" />
+
    </children>
 </AnchorPane>

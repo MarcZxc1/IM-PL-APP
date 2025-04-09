@@ -1,37 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Arc?>
-<?import javafx.scene.shape.ArcType?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="680.0" prefWidth="1250.0"
-            styleClass="Profile-Page" stylesheets="@../../../../../style.css"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+<AnchorPane fx:id="profilePane" prefHeight="700.0" prefWidth="1250.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+
    <children>
-      <Button layoutX="43.0" layoutY="40.0" mnemonicParsing="false"
-              onAction="#HOME" text="Home" />
 
-      <!-- Progress Arc -->
-      <Arc fx:id="progressArc" layoutX="818.0" layoutY="319.0"
-           radiusX="100.0" radiusY="100.0"
-           startAngle="90" length="0"
-           type="OPEN" stroke="white" strokeWidth="15" fill="transparent"/>
+      <!-- Sidebar Navigation -->
+      <VBox fx:id="sidebarVBox" prefHeight="700.0" spacing="10" style="-fx-background-color: #3B7B7B; -fx-padding: 20; -fx-pref-width: 200;">
+         <children>
+            <ToggleButton fx:id="dashboardButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Dashboard" />
+            <ToggleButton fx:id="profileButton" selected="true" style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-alignment: CENTER_LEFT;" text="  Profile " />
+            <ToggleButton fx:id="nutritionButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Nutrition" />
+            <ToggleButton fx:id="workoutButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Workout / Goal" />
+            <ToggleButton fx:id="fitnessMetricButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Fitness Metric" />
+            <ToggleButton fx:id="reminderButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Reminder" />
+            <ToggleButton fx:id="reportButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Report" />
+            <VBox VBox.vgrow="ALWAYS" />
+            <ToggleButton fx:id="settingsButton" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" text="  Settings" />
+            <Button style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7;-fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Log out" />
+         </children>
+      </VBox>
 
-      <!-- Progress Bar -->
-      <ProgressBar fx:id="progressBar" layoutX="718.0" layoutY="219.0"
-                   prefWidth="200.0" progress="0.0" />
+      <!-- Profile Card -->
+      <Pane layoutX="230.0" layoutY="30.0" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="90.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <!-- Replace with your avatar image -->
+               <image>
 
-      <!-- Percentage Label -->
-      <Label fx:id="percentageLabel" layoutX="807.0" layoutY="250.0"
-             text="0%" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
+               </image>
+            </ImageView>
+            <Label layoutX="80.0" layoutY="110.0" style="-fx-text-fill: white; -fx-font-size: 16;" text="Jane Dancalan" />
+            <Label layoutX="80.0" layoutY="130.0" style="-fx-text-fill: white;" text="Female" />
+            <Label layoutX="80.0" layoutY="150.0" style="-fx-text-fill: white;" text="23 years old" />
+            <Label layoutX="80.0" layoutY="170.0" style="-fx-text-fill: white;" text="Born: 12/30/2001" />
+         </children>
+      </Pane>
+
+      <!-- Activity Chart (Mocked with Pane for now) -->
+      <Pane layoutX="510.0" layoutY="30.0" prefHeight="200.0" prefWidth="450.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+         <children>
+            <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="Activity" />
+            <Label layoutX="20.0" layoutY="150.0" style="-fx-text-fill: #888;" text="Traveled last month: 50Km" />
+            <!-- Chart would be added with actual code logic -->
+         </children>
+      </Pane>
+
+      <!-- Notes Section -->
+      <Pane layoutX="230.0" layoutY="300.0" prefHeight="160.0" prefWidth="400.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+         <children>
+            <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="Notes" />
+            <VBox layoutX="20.0" layoutY="40.0" spacing="10.0">
+               <children>
+                  <Label text="✔ Monday, 6th April 2020 – Book for general service" />
+                  <Label text="❗ Thursday, 24th Oct 2021 – Watch out for recall" />
+                  <Label text="ℹ Monday, 13th August 2018 – Maintenance complete" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+
+      <!-- To-do List -->
+      <Pane layoutX="670.0" layoutY="300.0" prefHeight="160.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+         <children>
+            <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="To-do List" />
+            <VBox layoutX="20.0" layoutY="40.0" spacing="8.0">
+               <children>
+                  <CheckBox selected="false" text="Run 10km" />
+                  <CheckBox selected="true" text="Push up (10)" />
+                  <CheckBox selected="true" text="Pull up (10)" />
+                  <CheckBox selected="false" text="Squat (20)" />
+               </children>
+            </VBox>
+            <Button layoutX="180.0" layoutY="120.0" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-background-radius: 6;" text="See All" />
+         </children>
+      </Pane>
+
+      <!-- Reminder Table -->
+      <TableView layoutX="267.0" layoutY="500.0" prefHeight="160.0" prefWidth="651.0">
+         <columns>
+            <TableColumn fx:id="descriptionCol" prefWidth="200.0" text="Description" />
+            <TableColumn fx:id="dueCol" prefWidth="150.0" text="Due" />
+            <TableColumn fx:id="overdueCol" prefWidth="150.0" text="Overdue" />
+            <TableColumn fx:id="statusCol" prefWidth="150.0" text="Status" />
+         </columns>
+      </TableView>
+
    </children>
 </AnchorPane>

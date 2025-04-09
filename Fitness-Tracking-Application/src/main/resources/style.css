@@ -315,10 +315,66 @@
     -fx-content-display: flex;
 }
 
-.Nutrition-Page{
-    -fx-background-color: #6767c7;
+.Settings-Page{
+    /* Root Styles */
+    .root {
+        -fx-font-family: Arial, sans-serif;
+        -fx-background-color: #f4f4f4;
+    }
+
+    /* Header */
+    .header {
+        -fx-background-color: #333;
+        -fx-text-fill: white;
+        -fx-padding: 20px;
+        -fx-font-size: 22px;
+        -fx-font-weight: bold;
+        -fx-border-color: #77aaff;
+        -fx-border-width: 3px;
+        -fx-alignment: center;
+    }
+
+    /* Profile Section */
+    .profile-container {
+        -fx-background-color: #fff;
+        -fx-padding: 20px;
+        -fx-border-radius: 10px;
+        -fx-box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Labels */
+    .label-title {
+        -fx-font-size: 16px;
+        -fx-text-fill: #333;
+        -fx-font-weight: bold;
+    }
+
+    .label-content {
+        -fx-font-size: 14px;
+        -fx-text-fill: #555;
+    }
+
+    /* Buttons */
+    .button {
+        -fx-background-color: #77aaff;
+        -fx-text-fill: white;
+        -fx-font-size: 16px;
+        -fx-padding: 10px 20px;
+        -fx-border-radius: 5px;
+        -fx-cursor: hand;
+    }
+
+    .button:hover {
+        -fx-background-color: #555;
+    }
 
 }
+
+.Nutrition-Page {
+    }
+
+
+
 
 
 

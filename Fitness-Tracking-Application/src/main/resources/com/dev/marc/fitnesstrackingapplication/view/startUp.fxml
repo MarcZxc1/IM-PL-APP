@@ -35,7 +35,7 @@
                <font>
                   <Font size="18.0" />
                </font>
-            </Button> 
+            </Button>
             <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="170.0" />
             <TextField fx:id="visiblePasswordField" layoutX="50.0" layoutY="170.0" />
             <Button fx:id="signup" layoutX="51.0" layoutY="252.0" mnemonicParsing="false" onAction="#toRegister" text="Sign up" />
