@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #E2F1E7;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.SettingsController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.SettingsController">
     <!-- Sidebar -->
     <left>
         <VBox fx:id="sidebarVBox" spacing="10" style="-fx-background-color: #3B7B7B; -fx-padding: 20; -fx-pref-width: 200;">
@@ -50,27 +52,45 @@
                         <ColumnConstraints percentWidth="50" />
                     </columnConstraints>
 
-                    <!-- Row 1: Address -->
-                    <Label style="-fx-text-fill: #1E2F38;" text="Address" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField prefWidth="300" promptText="Commonwealth, Quezon City" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="1" />
+                    <!-- Row 1: Name -->
+                    <Label style="-fx-text-fill: #1E2F38;" text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField prefWidth="300" promptText="John Doe" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-                    <!-- Row 2: Email -->
-                    <Label style="-fx-text-fill: #1E2F38;" text="Email Address" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField prefWidth="300" promptText="geiyndncln@gmail.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="3" />
+                    <!-- Row 2: Username -->
+                    <Label style="-fx-text-fill: #1E2F38;" text="Username" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField prefWidth="300" promptText="username123" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
 
                     <!-- Row 3: DOB & Gender -->
-                    <Label style="-fx-text-fill: #1E2F38;" text="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField promptText="12.30.2001" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <Label style="-fx-text-fill: #1E2F38;" text="Gender" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                    <TextField prefHeight="29.0" prefWidth="262.0" promptText="Male" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-               <rowConstraints>
+                    <Label style="-fx-text-fill: #1E2F38;" text="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <DatePicker fx:id="dobDatePicker" style="-fx-background-color: #ffffff; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                    <Label style="-fx-text-fill: #1E2F38;" text="Gender" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <ComboBox fx:id="genderComboBox" prefHeight="29.0" prefWidth="262.0" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Male" />
+                                <String fx:value="Female" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <!-- Row 4: Address -->
+                    <Label style="-fx-text-fill: #1E2F38;" text="Address" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField prefWidth="300" promptText="Commonwealth, Quezon City" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <!-- Row 5: Email -->
+                    <Label style="-fx-text-fill: #1E2F38;" text="Email Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <TextField prefWidth="300" promptText="geiyndncln@gmail.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                  <RowConstraints maxHeight="17.0" minHeight="17.0" prefHeight="17.0" />
                   <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
+                    </rowConstraints>
                 </GridPane>
 
                 <!-- Photo section -->
@@ -79,26 +99,28 @@
                         <Label style="-fx-text-fill: #1E2F38;" text="Your photo" />
                         <Label style="-fx-text-fill: #1E2F38; -fx-font-size: 12;" text="This will be displayed on your profile." />
                     </VBox>
-                    <ImageView fitHeight="50" fitWidth="50" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
-                    <Hyperlink style="-fx-text-fill: #3B7B7B;" text="Delete" />
-                    <Hyperlink style="-fx-text-fill: #3B7B7B;" text="Update" />
+                    <ImageView fx:id="profileImageView" fitHeight="50" fitWidth="50" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
+                    <Hyperlink fx:id="deletePhotoLink" style="-fx-text-fill: #3B7B7B;" text="Delete" />
+                    <Hyperlink fx:id="updatePhotoLink" style="-fx-text-fill: #3B7B7B;" text="Update" />
                 </HBox>
 
                 <!-- Socials -->
                 <VBox spacing="10">
                     <Label style="-fx-text-fill: #1E2F38;" text="Social Profiles" />
 
-                    <!-- Facebook/Instagram Field -->
                     <HBox spacing="10">
                         <Label style="-fx-text-fill: #1E2F38;" text="Facebook" />
-                        <TextField prefWidth="200" promptText="facebook.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" />
+                        <TextField fx:id="facebookField" prefWidth="200" promptText="facebook.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" />
                     </HBox>
 
                     <HBox spacing="10">
                         <Label style="-fx-text-fill: #1E2F38;" text="Instagram" />
-                        <TextField prefWidth="200" promptText="instagram.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" />
+                        <TextField fx:id="instagramField" prefWidth="200" promptText="instagram.com" style="-fx-background-color: #ffffff; -fx-text-fill: #1E2F38; -fx-border-color: #3B7B7B; -fx-border-width: 2;" />
                     </HBox>
                 </VBox>
+
+                <!-- Save Button -->
+                <Button fx:id="saveButton" style="-fx-background-color: #3B7B7B; -fx-text-fill: white; -fx-padding: 10 20; -fx-font-size: 14; -fx-background-radius: 8;" text="Save Changes" />
             </VBox>
         </AnchorPane>
     </center>

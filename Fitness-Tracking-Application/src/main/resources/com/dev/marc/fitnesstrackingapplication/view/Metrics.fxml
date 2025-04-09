@@ -33,7 +33,14 @@
             <Label layoutX="57.0" layoutY="67.0" style="-fx-text-fill: white;" text="Age:" />
             <TextField fx:id="ageFieldBMI" layoutX="149.0" layoutY="63.0" prefWidth="100.0" />
             <Label layoutX="307.0" layoutY="67.0" style="-fx-text-fill: white;" text="Gender:" />
-            <TextField fx:id="genderFieldBMI" layoutX="397.0" layoutY="63.0" prefWidth="100.0" />
+            <ComboBox fx:id="genderComboBoxBMI" layoutX="397.0" layoutY="63.0" prefWidth="100.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Male" />
+                        <String fx:value="Female" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <Label layoutX="57.0" layoutY="125.0" style="-fx-text-fill: white;" text="Height (cm):" />
             <TextField fx:id="heightFieldBMI" layoutX="149.0" layoutY="121.0" prefWidth="100.0" />
             <Label layoutX="307.0" layoutY="125.0" style="-fx-text-fill: white;" text="Weight (kg):" />
@@ -55,7 +62,14 @@
             <Label layoutX="63.0" layoutY="65.0" style="-fx-text-fill: white;" text="Age:" />
             <TextField fx:id="ageFieldIdeal" layoutX="142.0" layoutY="58.0" prefWidth="100.0" />
             <Label layoutX="293.0" layoutY="65.0" style="-fx-text-fill: white;" text="Gender:" />
-            <TextField fx:id="genderFieldIdeal" layoutX="361.0" layoutY="58.0" prefWidth="100.0" />
+            <ComboBox fx:id="genderComboBoxIdeal" layoutX="361.0" layoutY="58.0" prefWidth="100.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Male" />
+                        <String fx:value="Female" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <Label layoutX="63.0" layoutY="112.0" style="-fx-text-fill: white;" text="Height (cm):" />
             <TextField fx:id="heightFieldIdeal" layoutX="142.0" layoutY="108.0" prefWidth="100.0" />
             <Button fx:id="calculateIdealWeightButton" layoutX="192.0" layoutY="151.0" prefHeight="30.0" prefWidth="243.0" text="Calculate Ideal Weight" />
@@ -72,7 +86,14 @@
             <Label layoutX="40.0" layoutY="63.0" style="-fx-text-fill: white;" text="Age:" />
             <TextField fx:id="ageFieldProtein" layoutX="135.0" layoutY="57.0" prefWidth="100.0" />
             <Label layoutX="285.0" layoutY="63.0" style="-fx-text-fill: white;" text="Gender:" />
-            <TextField fx:id="genderFieldProtein" layoutX="376.0" layoutY="57.0" prefWidth="100.0" />
+            <ComboBox fx:id="genderComboBoxProtein" layoutX="376.0" layoutY="57.0" prefWidth="100.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Male" />
+                        <String fx:value="Female" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
             <Label layoutX="39.0" layoutY="105.0" style="-fx-text-fill: white;" text="Height (cm):" />
             <TextField fx:id="heightFieldProtein" layoutX="135.0" layoutY="101.0" prefWidth="100.0" />
             <Label layoutX="285.0" layoutY="105.0" style="-fx-text-fill: white;" text="Weight (kg):" />
@@ -97,7 +118,6 @@
         </children>
     </Pane>
 
-
-          <!-- Protein Calculator Section Label -->
+    <!-- Protein Calculator Section Label -->
     <Label layoutX="907.0" layoutY="188.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Protein Calculator" />
 </AnchorPane>

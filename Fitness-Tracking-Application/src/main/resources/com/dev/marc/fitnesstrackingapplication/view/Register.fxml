@@ -6,8 +6,7 @@
 
 <AnchorPane fx:id="paneContainer" prefHeight="600.0" prefWidth="800.0" styleClass="Register-Page" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.RegisterController">
    <children>
-      <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="47.0" prefWidth="156.0" text="To Dashboard" />
-      <Button layoutX="40.0" layoutY="79.0" mnemonicParsing="false" onAction="#switchToLogin" text="To Login" />
+      <Button layoutX="40.0" layoutY="79.0" mnemonicParsing="false" onAction="#switchToLogin" text="Back" />
       <Pane layoutX="262.0" layoutY="148.0" prefHeight="340.0" prefWidth="305.0">
          <children>
             <TextField layoutX="26.0" layoutY="270.0" />
