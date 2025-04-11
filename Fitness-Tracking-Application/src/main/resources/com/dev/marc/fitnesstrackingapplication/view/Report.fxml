@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReportController" prefWidth="1000.0" prefHeight="700.0" style="-fx-background-color: #E2F1E7;">
-    <!-- Sidebar (same as Reminder) -->
-    <left>
-        <VBox spacing="10" style="-fx-background-color: #3B7B7B; -fx-padding: 20; -fx-pref-width: 200;">
-            <ToggleButton text="  Dashboard" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Profile" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Nutrition" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Workout / Goal" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Fitness Metric" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Reminder" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton text="  Report" selected="true" style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-alignment: CENTER_LEFT;"/>
-            <VBox VBox.vgrow="ALWAYS" />
-            <ToggleButton text="  Settings" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <Button text="  Log out" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-        </VBox>
-    </left>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1105.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReportController">
 
     <!-- Center Report Section -->
     <center>
         <AnchorPane>
-            <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                 <!-- Title -->
-                <Label text="Weekly / Monthly Fitness Report" style="-fx-text-fill: #1E2F38;">
-                    <font><Font name="Segoe UI Bold" size="24"/></font>
+                <Label style="-fx-text-fill: #1E2F38;" text="Weekly / Monthly Fitness Report">
+                    <font><Font name="Segoe UI Bold" size="24" /></font>
                 </Label>
 
                 <!-- Summary -->
                 <HBox spacing="40">
-                    <Label fx:id="totalStepsLabel" text="Total Steps: 0" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #1E2F38;" />
-                    <Label fx:id="totalWorkoutsLabel" text="Workouts Completed: 0" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #1E2F38;" />
+                    <Label fx:id="totalStepsLabel" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #1E2F38;" text="Total Steps: 0" />
+                    <Label fx:id="totalWorkoutsLabel" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #1E2F38;" text="Workouts Completed: 0" />
                 </HBox>
 
                 <!-- Detailed Box -->
                 <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5;">
-                    <Label text="Step Details" style="-fx-text-fill: #1E2F38;">
-                        <font><Font name="Segoe UI Semibold" size="16"/></font>
+                    <Label style="-fx-text-fill: #1E2F38;" text="Step Details">
+                        <font><Font name="Segoe UI Semibold" size="16" /></font>
                     </Label>
                     <ListView fx:id="stepListView" prefHeight="120" />
 
-                    <Label text="Workout Details" style="-fx-text-fill: #1E2F38;">
-                        <font><Font name="Segoe UI Semibold" size="16"/></font>
+                    <Label style="-fx-text-fill: #1E2F38;" text="Workout Details">
+                        <font><Font name="Segoe UI Semibold" size="16" /></font>
                     </Label>
                     <ListView fx:id="workoutListView" prefHeight="120" />
                 </VBox>

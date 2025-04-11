@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,10 +18,10 @@ import java.io.IOException;
 public class RegisterController {
 
 	@FXML
-	private AnchorPane paneContainer;
+	private Pane paneContainer;
 
 
-	public void setPaneContainer(AnchorPane paneContainer) {
+	public void setPaneContainer(Pane paneContainer) {
 		this.paneContainer = paneContainer;
 	}
 

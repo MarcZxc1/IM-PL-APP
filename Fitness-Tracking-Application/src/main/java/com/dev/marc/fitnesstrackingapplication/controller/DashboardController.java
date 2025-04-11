@@ -1,5 +1,7 @@
 package com.dev.marc.fitnesstrackingapplication.controller;
 
+import com.dev.marc.fitnesstrackingapplication.utils.SceneSwitcher;
+import com.dev.marc.fitnesstrackingapplication.utils.TabSwitch;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,7 +38,8 @@ public class DashboardController {
 	private Button homeButton;
 
 	@FXML
-	private AnchorPane paneContainer;
+	public Pane paneContainer;
+
 
 	private double progress = 0;
 
@@ -58,6 +62,18 @@ public class DashboardController {
 	private Label label3;
 	@FXML
 	private Label label4;
+
+	ProfileController profileController = new ProfileController();
+	NutritionController nutritionController = new NutritionController();
+	WorkoutAndGoalsController workoutAndGoalsController = new WorkoutAndGoalsController();
+	MetricsController metricsController = new MetricsController();
+	ReminderController reminderController = new ReminderController();
+	ReportController reportController = new ReportController();
+	SettingsController settingsController = new SettingsController();
+
+	public void setPaneContainer(Pane paneContainer) {this.paneContainer = paneContainer;}
+
+	private static final String VIEW_PATH = "/com/dev/marc/fitnesstrackingapplication/view/";
 
 	public void initialize() {
 		initializeArcs();
@@ -99,29 +115,45 @@ public class DashboardController {
 	}
 
 	@FXML
-	public void goToProfile(ActionEvent event) throws IOException {
-		loadScene("/path/to/Profile.fxml", event);
-	}
+	private void Profile(ActionEvent event) throws IOException {
+		profileController.setPaneContainer(paneContainer);
+		profileController.goToProfile(event);}
 
 	@FXML
-	public void goToTrack(ActionEvent event) throws IOException {
-		loadScene("/path/to/Map.fxml", event);
-	}
+	private void Nutrition(ActionEvent event) throws IOException {
+		nutritionController.setPaneContainer(paneContainer);
+		nutritionController.goToNutrition(event);}
 
 	@FXML
-	public void goToWorkoutGoals(ActionEvent event) throws IOException {
-		loadScene("/path/to/WorkoutGoals.fxml", event);
-	}
+	private void WorkoutANDGoals(ActionEvent event) throws IOException {
+		workoutAndGoalsController.setPaneContainer(paneContainer);
+		workoutAndGoalsController.goToWorkoutAndGoals(event);}
 
 	@FXML
-	public void goToNutrition(ActionEvent event) throws IOException {
-		loadScene("/path/to/Nutrition.fxml", event);
-	}
+	private void Metrics(ActionEvent event) throws IOException {
+		metricsController.setPaneContainer(paneContainer);
+		metricsController.goToMetrics(event);}
 
 	@FXML
-	public void toRegister(ActionEvent event) throws IOException {
-		loadScene("/path/to/Register.fxml", event);
-	}
+	private void Reminder(ActionEvent event) throws IOException {
+		reminderController.setPaneContainer(paneContainer);
+		reminderController.goToReminder(event);}
+
+
+	@FXML
+	private void Report(ActionEvent event) throws IOException {
+		reportController.setPaneContainer(paneContainer);
+		reportController.goToReport(event);}
+
+	@FXML
+	private void Settings(ActionEvent event) throws IOException {
+		settingsController.setPaneContainer(paneContainer);
+		settingsController.goToSettings(event);}
+
+
+
+
+
 
 	private void loadScene(String fxmlPath, ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -144,6 +176,13 @@ public class DashboardController {
 		timeline.setCycleCount(text.length());
 		timeline.play();
 
+	}
+
+	@FXML
+	public void homeButton(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		SceneSwitcher.switchScene(stage, VIEW_PATH + "Dashboard.fxml",
+				1315, 740, false);
 	}
 
 }

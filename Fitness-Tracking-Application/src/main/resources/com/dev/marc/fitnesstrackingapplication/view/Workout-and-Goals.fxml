@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="680.0" prefWidth="1250.0" styleClass="Workout-and-Goals" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.WorkoutAndGoalsController">
+<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1105.0" styleClass="Workout-and-Goals" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.WorkoutAndGoalsController">
     <children>
       <Button layoutX="49.0" layoutY="38.0" mnemonicParsing="false" onAction="#HOME" text="Home" />
       <ChoiceBox fx:id="muscleChoiceBox" layoutX="49.0" layoutY="553.0" prefWidth="150.0" stylesheets="@../../../../../style.css" />

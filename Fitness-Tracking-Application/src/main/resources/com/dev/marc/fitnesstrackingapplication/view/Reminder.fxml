@@ -1,38 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
 
-<?import javafx.scene.image.Image?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReminderController" prefWidth="1000.0" prefHeight="700.0" style="-fx-background-color: #E2F1E7;">
-    <!-- Sidebar -->
-    <left>
-        <VBox fx:id="sidebarVBox" spacing="10" style="-fx-background-color: #3B7B7B; -fx-padding: 20; -fx-pref-width: 200;">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-            <ToggleButton fx:id="dashboardButton" text="  Dashboard"
-                          style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;"/>
-            <ToggleButton fx:id="profileButton" text="  Profile" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <ToggleButton fx:id="nutritionButton" text="  Nutrition" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <ToggleButton fx:id="workoutButton" text="  Workout / Goal" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <ToggleButton fx:id="fitnessMetricButton" text="  Fitness Metric" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <ToggleButton fx:id="reminderButton" text="  Reminder" selected="true" style="-fx-background-color: #639A8F;-fx-font-size: 16px; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-alignment: CENTER_LEFT;" />
-            <ToggleButton fx:id="reportButton" text="  Report" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-
-            <VBox VBox.vgrow="ALWAYS" />
-
-            <ToggleButton fx:id="settingsButton" text="  Settings" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-            <Button text="  Log out" style="-fx-background-color: transparent;-fx-font-size: 16px; -fx-text-fill: #E2F1E7; -fx-alignment: CENTER_LEFT;" />
-        </VBox>
-    </left>
+<BorderPane prefHeight="700.0" prefWidth="1105.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReminderController">
 
     <!-- Main Content Area -->
     <center>
         <AnchorPane>
-            <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                 <!-- Title -->
-                <Label text="Reminder" style="-fx-text-fill: #1E2F38;">
+                <Label style="-fx-text-fill: #1E2F38;" text="Reminder">
                     <font>
                         <Font name="Segoe UI Bold" size="24" />
                     </font>
@@ -40,14 +24,14 @@
 
                 <!-- Reminder Form Section -->
                 <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5;">
-                    <Label text="Set Your Workout Reminder" style="-fx-text-fill: #1E2F38;">
+                    <Label style="-fx-text-fill: #1E2F38;" text="Set Your Workout Reminder">
                         <font>
                             <Font name="Segoe UI Semibold" size="16" />
                         </font>
                     </Label>
 
                     <!-- Date Picker for Reminder -->
-                    <Label text="Select Date" style="-fx-text-fill: #1E2F38;">
+                    <Label style="-fx-text-fill: #1E2F38;" text="Select Date">
                         <font>
                             <Font name="Segoe UI Regular" size="14" />
                         </font>
@@ -55,25 +39,25 @@
                     <DatePicker fx:id="reminderDatePicker" style="-fx-pref-width: 300; -fx-border-color: #3B7B7B;" />
 
                     <!-- Notes Section -->
-                    <Label text="Reminder Notes" style="-fx-text-fill: #1E2F38;">
+                    <Label style="-fx-text-fill: #1E2F38;" text="Reminder Notes">
                         <font>
                             <Font name="Segoe UI Regular" size="14" />
                         </font>
                     </Label>
-                    <TextArea fx:id="reminderNotesField" wrapText="true" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-height: 100; -fx-pref-width: 300;" />
+                    <TextArea fx:id="reminderNotesField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-height: 100; -fx-pref-width: 300;" wrapText="true" />
 
-                    <Button text="Save Reminder" fx:id="saveReminderButton" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 150; -fx-pref-height: 35; -fx-background-radius: 5;" />
+                    <Button fx:id="saveReminderButton" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 150; -fx-pref-height: 35; -fx-background-radius: 5;" text="Save Reminder" />
                 </VBox>
 
                 <!-- Motivational Quote Section -->
                 <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5;">
-                    <Label text="Motivational Quote of the Day" style="-fx-text-fill: #1E2F38;">
+                    <Label style="-fx-text-fill: #1E2F38;" text="Motivational Quote of the Day">
                         <font>
                             <Font name="Segoe UI Semibold" size="16" />
                         </font>
                     </Label>
 
-                    <Label text="“Success is the sum of small efforts, repeated day in and day out.”" style="-fx-text-fill: #6c757d; -fx-font-size: 14; -fx-padding: 15 0 15 0;" />
+                    <Label style="-fx-text-fill: #6c757d; -fx-font-size: 14; -fx-padding: 15 0 15 0;" text="“Success is the sum of small efforts, repeated day in and day out.”" />
                 </VBox>
             </VBox>
         </AnchorPane>

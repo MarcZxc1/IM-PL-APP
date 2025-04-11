@@ -73,7 +73,7 @@
     -fx-border-width: 2px;
 }
 
-.google-oath{
+.google-oath-Button{
     -fx-background-image: url('assets/google-icon.png');
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
@@ -81,45 +81,97 @@
 
 }
 
-.button {
-    -fx-background-color: #A162F7;
+/* Base styling */
+.signupButton, .loginButton, .google-oath-Button {
+    -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 15px;
-    -fx-border-color: #ffffff;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
+    -fx-font-weight: normal;
+    -fx-border-color: white;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
     -fx-cursor: hand;
-    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);*/
+    -fx-padding: 10px 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.3, 0, 2);
     -fx-background-insets: 0;
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Hover Effects */
-.button:hover {
-    -fx-background-color: #2f59ab;
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-    -fx-transition: all 0.3s ease-in-out;
+/* Hover effect */
+.signupButton:hover, .loginButton:hover, .google-oath-Button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #3B7B7B;
+    -fx-border-color: #3B7B7B;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.4, 0, 2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-.button:pressed {
-    -fx-background-color: rgba(25, 167, 246, 0.09);
+/* Pressed effect */
+.signupButton:pressed, .loginButton:pressed, .google-oath-Button:pressed {
+    -fx-background-color: rgba(59, 123, 123, 0.15);
     -fx-scale-x: 1.0;
     -fx-scale-y: 1.0;
     -fx-transition: all 0.2s ease-in-out;
 }
 
-.button.glowing {
-    /*-fx-background-color: transparent;*/
+/* Glowing effect */
+.signupButton.glowing, .loginButton.glowing, .google-oath-Button.glowing {
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-padding: 15px 40px;
-    -fx-border-color: #0c83c9;
-    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
     -fx-background-insets: 0;
-    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.8), 20, 0.5, 0, 0); /* Initial glow */
-    -fx-transition: all 0.3s ease-in-out; /* Smooth transition for glow effect */
+    -fx-effect: dropshadow(gaussian, #3B7B7B, 20, 0.5, 0, 0); /* Subtle teal glow */
+    -fx-transition: all 0.3s ease-in-out;
 }
+
+
+
+
+
+/* .button {*/
+/*     -fx-background-color: transparent;*/
+/*     -fx-text-fill: white;*/
+/*     -fx-font-size: 15px;*/
+/*     -fx-border-color: white;*/
+/*     -fx-border-radius: 20px;*/
+/*     -fx-background-radius: 20px;*/
+/*     -fx-cursor: hand;*/
+/*     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 10, 0.5, 0, 0);*/
+/*     -fx-background-insets: 0;*/
+/*     -fx-transition: all 0.3s ease-in-out;*/
+/* }*/
+
+/*!* Hover Effects *!*/
+/*.button:hover {*/
+/*    -fx-background-color: #2f59ab;*/
+/*    -fx-scale-x: 1.1;*/
+/*    -fx-scale-y: 1.1;*/
+/*    -fx-transition: all 0.3s ease-in-out;*/
+/*}*/
+
+/*.button:pressed {*/
+/*    -fx-background-color: rgba(25, 167, 246, 0.09);*/
+/*    -fx-scale-x: 1.0;*/
+/*    -fx-scale-y: 1.0;*/
+/*    -fx-transition: all 0.2s ease-in-out;*/
+/*}*/
+
+/*.button.glowing {*/
+/*    !*-fx-background-color: transparent;*!*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-padding: 15px 40px;*/
+/*    -fx-border-color: #0c83c9;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-insets: 0;*/
+/*    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.8), 20, 0.5, 0, 0); !* Initial glow *!*/
+/*    -fx-transition: all 0.3s ease-in-out; !* Smooth transition for glow effect *!*/
+/*}*/
 
 .text-field{
     -fx-background-color: transparent;
@@ -147,6 +199,7 @@
     -fx-alignment: center; /* Center the content */
 }
 
+
 .Pane1, .Pane2, .Pane3, .Pane4 {
     -fx-background-color: red;
 }
@@ -158,11 +211,70 @@
 
 .DashboardPane{
     /*-fx-background-image: url('assets/Dashboard1.jpg');*/
-    -fx-background-color: #F5F5F5;
+    -fx-background-color: #3B7B7B;
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-alignment: center; /* Center the content */
+
+}
+
+
+.DBButton, .DBButton1, .DBButton2, .DBButton3, .DBButton4, .DBButton5,
+.DBButton6, .DBButton7, .DBButton8, .DBButton9 {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: normal;
+    -fx-border-color: transparent;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-padding: 10px 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.3, 0, 2);
+    -fx-background-insets: 0;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.DBButton:hover, .DBButton1:hover, .DBButton2:hover, .DBButton3:hover, .DBButton4:hover,
+.DBButton5:hover, .DBButton6:hover, .DBButton7:hover, .DBButton8:hover, .DBButton9:hover {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: #3B7B7B;
+    /*-fx-border-color: #3B7B7B;*/
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.4, 0, 2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Pressed effect */
+.DBButton:pressed, .DBButton1:pressed, .DBButton2:pressed, .DBButton3:pressed, .DBButton4:pressed,
+.DBButton5:pressed, .DBButton6:pressed, .DBButton7:pressed, .DBButton8:pressed, .DBButton9:pressed {
+    -fx-background-color: rgba(59, 123, 123, 0.15);
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Glowing effect */
+.DBButton.glowing, .DBButton1.glowing, .DBButton2.glowing, .DBButton3.glowing, .DBButton4.glowing,
+.DBButton5.glowing, .DBButton6.glowing, .DBButton7.glowing, .DBButton8.glowing, .DBButton9.glowing {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 15px 40px;
+    -fx-border-color: white;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(gaussian, #3B7B7B, 20, 0.5, 0, 0); /* Subtle teal glow */
+    -fx-transition: all 0.3s ease-in-out;
+}
+.Pane {
+    -fx-margin-top: 10px;
+    -fx-text-fill: white;
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-animation: fadeInOut 3s infinite;
 
 }
 
@@ -355,18 +467,18 @@
     }
 
     /* Buttons */
-    .button {
-        -fx-background-color: #77aaff;
-        -fx-text-fill: white;
-        -fx-font-size: 16px;
-        -fx-padding: 10px 20px;
-        -fx-border-radius: 5px;
-        -fx-cursor: hand;
-    }
+    /*.button {*/
+    /*    -fx-background-color: #77aaff;*/
+    /*    -fx-text-fill: white;*/
+    /*    -fx-font-size: 16px;*/
+    /*    -fx-padding: 10px 20px;*/
+    /*    -fx-border-radius: 5px;*/
+    /*    -fx-cursor: hand;*/
+    /*}*/
 
-    .button:hover {
-        -fx-background-color: #555;
-    }
+    /*.button:hover {*/
+    /*    -fx-background-color: #555;*/
+    /*}*/
 
 }
 

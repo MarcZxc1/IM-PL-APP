@@ -1,7 +1,13 @@
 package com.dev.marc.fitnesstrackingapplication.controller;
 
+import com.dev.marc.fitnesstrackingapplication.utils.TabSwitch;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 
 public class MetricsController {
 
@@ -13,16 +19,30 @@ public class MetricsController {
     private TextArea proteinResultArea;
 
     @FXML
+    private Pane paneContainer;
+
+    private static final String VIEW_PATH = "/com/dev/marc/fitnesstrackingapplication/view/";
+
+    public void setPaneContainer(Pane paneContainer) {this.paneContainer = paneContainer;}
+
+    @FXML
+    public void goToMetrics(ActionEvent event) throws IOException {
+        TabSwitch.switchTab(paneContainer, VIEW_PATH + "Metrics.fxml",
+                1250, 680, false );
+    }
+
+
+    @FXML
     private void initialize() {
         // Populate activityComboBox
-        activityComboBox.getItems().addAll(
-                "Sedentary: Little or no exercise",
-                "Light: Exercise 1-3 times/week",
-                "Moderate: Exercise 4-5 times/week",
-                "Active: Daily exercise or intense exercise 3-4 times/week",
-                "Very Active: Intense exercise 6-7 times/week",
-                "Extra Active: Very intense exercise daily or physical job"
-        );
+//        activityComboBox.getItems().addAll(
+//                "Sedentary: Little or no exercise",
+//                "Light: Exercise 1-3 times/week",
+//                "Moderate: Exercise 4-5 times/week",
+//                "Active: Daily exercise or intense exercise 3-4 times/week",
+//                "Very Active: Intense exercise 6-7 times/week",
+//                "Extra Active: Very intense exercise daily or physical job"
+//        );
     }
 
     @FXML

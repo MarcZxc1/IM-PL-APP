@@ -31,15 +31,15 @@
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="205.0" layoutY="246.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="95.0" styleClass="login" stylesheets="@../../../../../style.css" text="Login">
+            <Button layoutX="205.0" layoutY="246.0" mnemonicParsing="false" onAction="#login" prefHeight="54.0" prefWidth="134.0" styleClass="loginButton" stylesheets="@../../../../../style.css" text="Login">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
             <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="170.0" />
             <TextField fx:id="visiblePasswordField" layoutX="50.0" layoutY="170.0" />
-            <Button fx:id="signup" layoutX="51.0" layoutY="252.0" mnemonicParsing="false" onAction="#toRegister" text="Sign up" />
-            <Button fx:id="btnLogin" layoutX="161.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleGoogleLogin" prefHeight="46.0" prefWidth="44.0" styleClass="google-oath" stylesheets="@../../../../../style.css" />
+            <Button fx:id="signup" layoutX="51.0" layoutY="252.0" mnemonicParsing="false" onAction="#toRegister" styleClass="signupButton" stylesheets="@../../../../../style.css" text="Sign up" />
+            <Button fx:id="btnLogin" layoutX="161.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleGoogleLogin" prefHeight="46.0" prefWidth="44.0" styleClass="google-oath-Button" stylesheets="@../../../../../style.css" />
             <ImageView fx:id="eyeIcon" fitHeight="30.0" fitWidth="23.0" layoutX="306.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../assets/view.png" />
@@ -51,7 +51,6 @@
             <Font size="41.0" />
          </font>
       </Label>
-      <Button layoutX="629.0" layoutY="74.0" text="Logout" />
       <ImageView fx:id="userImageView" fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="userInfoLabel" layoutX="58.0" layoutY="310.0" textFill="WHITE">
 

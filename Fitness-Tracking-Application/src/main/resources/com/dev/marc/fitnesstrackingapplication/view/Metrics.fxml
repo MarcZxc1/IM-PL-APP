@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="metricsPane" prefHeight="839.0" prefWidth="1508.0" style="-fx-background-color: #E6F2EF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.MetricsController">
-
-    <!-- Sidebar Navigation -->
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="852.0" prefWidth="200.0" style="-fx-background-color: #3B7B7B; -fx-padding: 20;">
-        <children>
-            <ToggleButton fx:id="dashboardButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Dashboard" />
-            <ToggleButton fx:id="profileButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Profile" />
-            <ToggleButton fx:id="nutritionButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Nutrition" />
-            <ToggleButton fx:id="workoutButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Workout / Goal" />
-            <ToggleButton fx:id="fitnessMetricButton" selected="true" style="-fx-background-color: #639A8F; -fx-background-radius: 8; -fx-text-fill: #1E2F38; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text=" Fitness Metric" />
-            <ToggleButton fx:id="reminderButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7;-fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Reminder" />
-            <ToggleButton fx:id="reportButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Report" />
-            <VBox VBox.vgrow="ALWAYS" />
-            <ToggleButton fx:id="settingsButton" style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7;-fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Settings" />
-            <Button style="-fx-background-color: transparent; -fx-text-fill: #E2F1E7; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT;" text="  Log out" />
-        </children>
-    </VBox>
+<AnchorPane fx:id="metricsPane" prefHeight="700.0" prefWidth="1105.0" style="-fx-background-color: #E6F2EF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.MetricsController">
 
     <!-- BMI Section Label -->
-    <Label layoutX="291.0" layoutY="39.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="BMI Calculator" />
+    <Label layoutX="14.0" layoutY="14.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="BMI Calculator" />
 
     <!-- BMI Calculator Box -->
-    <Pane layoutX="291.0" layoutY="78.0" prefHeight="300.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="14.0" layoutY="53.0" prefHeight="300.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
             <Label layoutX="57.0" layoutY="67.0" style="-fx-text-fill: white;" text="Age:" />
@@ -53,10 +42,10 @@
     </Pane>
 
     <!-- Ideal Weight Section Label -->
-    <Label layoutX="290.0" layoutY="420.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Ideal Weight Calculator" />
+    <Label layoutX="20.0" layoutY="366.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Ideal Weight Calculator" />
 
     <!-- Ideal Weight Calculator Box -->
-    <Pane layoutX="291.0" layoutY="462.0" prefHeight="280.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="21.0" layoutY="408.0" prefHeight="280.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
             <Label layoutX="63.0" layoutY="65.0" style="-fx-text-fill: white;" text="Age:" />
@@ -80,7 +69,7 @@
     </Pane>
 
     <!-- Protein Calculator Box -->
-    <Pane layoutX="907.0" layoutY="228.0" prefHeight="334.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="585.0" layoutY="249.0" prefHeight="334.0" prefWidth="496.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
             <Label layoutX="40.0" layoutY="63.0" style="-fx-text-fill: white;" text="Age:" />
@@ -119,5 +108,5 @@
     </Pane>
 
     <!-- Protein Calculator Section Label -->
-    <Label layoutX="907.0" layoutY="188.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Protein Calculator" />
+    <Label layoutX="585.0" layoutY="209.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Protein Calculator" />
 </AnchorPane>

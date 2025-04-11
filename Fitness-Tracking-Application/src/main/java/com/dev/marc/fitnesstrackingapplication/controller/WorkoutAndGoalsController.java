@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -48,7 +49,7 @@ public class WorkoutAndGoalsController implements Initializable {
 	private ListView<String> exerciseListView;
 
 	@FXML
-	private AnchorPane paneContainer;
+	private Pane paneContainer;
 
 	@FXML
 	private TableView<ExerciseService.Exercise> exerciseTableView;
@@ -80,6 +81,13 @@ public class WorkoutAndGoalsController implements Initializable {
 
 
 
+	@FXML
+	public void goToWorkoutAndGoals(ActionEvent event) throws IOException {
+		TabSwitch.switchTab(paneContainer, VIEW_PATH + "Workout-and-Goals.fxml",
+				1250, 680, false );
+	}
+
+
 
 	@FXML
 	private ImageView exerciseImageView;
@@ -91,7 +99,7 @@ public class WorkoutAndGoalsController implements Initializable {
 	@FXML
 	private Label stepCountLabel;
 
-	public void setPaneContainer(AnchorPane paneContainer) {this.paneContainer = paneContainer;}
+	public void setPaneContainer(Pane paneContainer) {this.paneContainer = paneContainer;}
 
 
 	@Override
