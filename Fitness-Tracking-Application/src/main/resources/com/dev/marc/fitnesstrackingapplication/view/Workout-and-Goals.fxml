@@ -7,16 +7,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1105.0" styleClass="Workout-and-Goals" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.WorkoutAndGoalsController">
     <children>
-      <Button layoutX="49.0" layoutY="38.0" mnemonicParsing="false" onAction="#HOME" text="Home" />
-      <ChoiceBox fx:id="muscleChoiceBox" layoutX="49.0" layoutY="553.0" prefWidth="150.0" stylesheets="@../../../../../style.css" />
-      <ListView fx:id="exerciseListView" layoutX="49.0" layoutY="96.0" prefHeight="226.0" prefWidth="382.0" stylesheets="@../../../../../style.css" />
-      <Button fx:id="fetchButton" layoutX="362.0" layoutY="571.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="120.0" text="Skadoosh" />
+      <ChoiceBox fx:id="muscleChoiceBox" layoutX="23.0" layoutY="254.0" prefWidth="150.0" stylesheets="@../../../../../style.css" />
+      <ListView fx:id="exerciseListView" layoutX="23.0" layoutY="14.0" prefHeight="226.0" prefWidth="382.0" stylesheets="@../../../../../style.css" />
+      <Button fx:id="fetchButton" layoutX="249.0" layoutY="259.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="120.0" text="Skadoosh" />
       <ImageView fx:id="exerciseImageView" fitHeight="115.0" fitWidth="97.0" layoutX="644.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-      <TableView fx:id="exerciseTableView" layoutX="568.0" layoutY="29.0" prefHeight="115.0" prefWidth="659.0" styleClass="modern-table" stylesheets="@../../../../../style.css">
+      <TableView fx:id="exerciseTableView" layoutX="23.0" layoutY="326.0" prefHeight="115.0" prefWidth="659.0" styleClass="modern-table" stylesheets="@../../../../../style.css">
           <columns>
               <TableColumn fx:id="colDifficulty" prefWidth="124.0" text="Difficulty" />
               <TableColumn fx:id="colEquipment" prefWidth="118.0" text="Equipment" />
@@ -24,14 +22,13 @@
               <TableColumn fx:id="colTips" prefWidth="206.0" text="Tips" />
           </columns>
       </TableView>
-      <WebView fx:id="webView" layoutX="845.0" layoutY="168.0" prefHeight="218.0" prefWidth="382.0" />
-      <TableView fx:id="tableView" layoutX="541.0" layoutY="263.0" prefHeight="239.0" prefWidth="266.0">
+      <TableView fx:id="tableView" layoutX="811.0" layoutY="14.0" prefHeight="239.0" prefWidth="266.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Activity" />
           <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="distanceColumn" prefWidth="75.0" text="Distance" />
         </columns>
       </TableView>
-      <Button layoutX="1010.0" layoutY="428.0" mnemonicParsing="false" text="fetchButton" />
+      <Button layoutX="998.0" layoutY="284.0" mnemonicParsing="false" text="fetchButton" />
    </children>
 </AnchorPane>

@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -51,7 +52,7 @@ public class MapController implements Initializable {
 	@FXML private TextField latitudeField;
 	@FXML private TextField distanceField;
 	@FXML private TextArea resultArea;
-	@FXML private AnchorPane paneContainer;
+	@FXML private Pane paneContainer;
 	@FXML private Button loginButton;
 	@FXML private Label stepsLabel;
 	@FXML private Label heartRateLabel;
@@ -376,7 +377,7 @@ public class MapController implements Initializable {
 	}
 
 	// Set the container for pane switching
-	public void setPaneContainer(AnchorPane paneContainer) {
+	public void setPaneContainer(Pane paneContainer) {
 		this.paneContainer = paneContainer;
 	}
 }

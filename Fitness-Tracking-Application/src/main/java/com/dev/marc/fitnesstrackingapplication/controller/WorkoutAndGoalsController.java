@@ -132,7 +132,7 @@ public class WorkoutAndGoalsController implements Initializable {
 			typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 			distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
 
-			authenticateUser();
+//			authenticateUser();
 		});
 
 
@@ -162,89 +162,89 @@ public class WorkoutAndGoalsController implements Initializable {
 			}
 		});
 	}
-
-	public void authenticateUser() {
-		try {
-			int port = 5000; // Change if needed
-			HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-			server.createContext("/", exchange -> {
-				String query = exchange.getRequestURI().getQuery();
-				if (query != null && query.contains("code=")) {
-					String code = query.split("code=")[1].split("&")[0];
-					try {
-						accessToken = StravaAuthService.exchangeCodeForToken(code);
-					} catch (InterruptedException e) {
-						throw new RuntimeException(e);
-					}
-					System.out.println("✅ Access Token: " + accessToken);
-					loadActivities(); // Load activities after authentication
-
-					String response = "Authentication successful! You can close this window.";
-					exchange.sendResponseHeaders(200, response.length());
-					exchange.getResponseBody().write(response.getBytes());
-					exchange.getResponseBody().close();
-					server.stop(1);
-				}
-			});
-			server.start(); // ✅ Ensure server is started before opening the browser
-			System.out.println("🌍 Listening for Strava redirect on http://localhost:" + port);
-
-			// Open the Strava authentication page
-			String authUrl = StravaAuthService.getAuthUrl();
-			java.awt.Desktop.getDesktop().browse(new URI(authUrl));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-
-	private String extractCode(String url) {
-		try {
-			String[] parts = url.split("code=");
-			if (parts.length > 1) {
-				return parts[1].split("&")[0]; // Extracts the OAuth code
-			}
-		} catch (Exception e) {
-			System.out.println("❌ Failed to extract code from URL: " + url);
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-
-	private String accessToken = "1cab3f5c4cf1128bec30eb3aefc21c627158379e";  // Retrieve from OAuth process
-
-	public void initialize() {
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-		distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
-
-		loadActivities();
-	}
-
-	private void loadActivities() {
-		if (accessToken == null || accessToken.isEmpty()) {
-			System.out.println("❌ No access token available!");
-			return;
-		}
-
-		try {
-			System.out.println("🔄 Fetching activities from Strava...");
-			List<Activity> activities = StravaFitnessService.getActivities(accessToken);
-
-			if (activities == null || activities.isEmpty()) {
-				System.out.println("❌ No activities received.");
-				return;
-			}
-
-			tableView.setItems(FXCollections.observableArrayList(activities));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//
+//	public void authenticateUser() {
+//		try {
+//			int port = 5000; // Change if needed
+//			HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+//			server.createContext("/", exchange -> {
+//				String query = exchange.getRequestURI().getQuery();
+//				if (query != null && query.contains("code=")) {
+//					String code = query.split("code=")[1].split("&")[0];
+//					try {
+//						accessToken = StravaAuthService.exchangeCodeForToken(code);
+//					} catch (InterruptedException e) {
+//						throw new RuntimeException(e);
+//					}
+//					System.out.println("✅ Access Token: " + accessToken);
+//					loadActivities(); // Load activities after authentication
+//
+//					String response = "Authentication successful! You can close this window.";
+//					exchange.sendResponseHeaders(200, response.length());
+//					exchange.getResponseBody().write(response.getBytes());
+//					exchange.getResponseBody().close();
+//					server.stop(1);
+//				}
+//			});
+//			server.start(); // ✅ Ensure server is started before opening the browser
+//			System.out.println("🌍 Listening for Strava redirect on http://localhost:" + port);
+//
+//			// Open the Strava authentication page
+//			String authUrl = StravaAuthService.getAuthUrl();
+//			java.awt.Desktop.getDesktop().browse(new URI(authUrl));
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//
+//
+//	private String extractCode(String url) {
+//		try {
+//			String[] parts = url.split("code=");
+//			if (parts.length > 1) {
+//				return parts[1].split("&")[0]; // Extracts the OAuth code
+//			}
+//		} catch (Exception e) {
+//			System.out.println("❌ Failed to extract code from URL: " + url);
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+//
+//
+//	private String accessToken = "1cab3f5c4cf1128bec30eb3aefc21c627158379e";  // Retrieve from OAuth process
+//
+//	public void initialize() {
+//		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//		typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+//		distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+//
+//		loadActivities();
+//	}
+//
+//	private void loadActivities() {
+//		if (accessToken == null || accessToken.isEmpty()) {
+//			System.out.println("❌ No access token available!");
+//			return;
+//		}
+//
+//		try {
+//			System.out.println("🔄 Fetching activities from Strava...");
+//			List<Activity> activities = StravaFitnessService.getActivities(accessToken);
+//
+//			if (activities == null || activities.isEmpty()) {
+//				System.out.println("❌ No activities received.");
+//				return;
+//			}
+//
+//			tableView.setItems(FXCollections.observableArrayList(activities));
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 
 	@FXML

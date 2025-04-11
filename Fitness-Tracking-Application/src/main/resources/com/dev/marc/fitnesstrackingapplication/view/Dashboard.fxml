@@ -25,6 +25,7 @@
             <Button layoutX="49.0" layoutY="447.0" mnemonicParsing="false" onAction="#Report" prefHeight="47.0" prefWidth="108.0" styleClass="DBButton7" stylesheets="@../../../../../style.css" text="REPORT" />
             <Button layoutX="37.0" layoutY="519.0" mnemonicParsing="false" onAction="#Settings" prefHeight="47.0" prefWidth="121.0" styleClass="DBButton8" stylesheets="@../../../../../style.css" text="SETTINGS" />
             <Button layoutX="39.0" layoutY="591.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="121.0" styleClass="DBButton8" stylesheets="@../../../../../style.css" text="LOG OUT" />
+            <Button layoutX="69.0" layoutY="661.0" mnemonicParsing="false" onAction="#Track" text="Track" />
          </children>
       </AnchorPane>
       <Pane fx:id="paneContainer" focusTraversable="true" layoutX="197.0" layoutY="4.0" prefHeight="692.0" prefWidth="1094.0">

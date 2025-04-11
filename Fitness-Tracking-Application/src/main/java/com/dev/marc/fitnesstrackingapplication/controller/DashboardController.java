@@ -2,7 +2,9 @@ package com.dev.marc.fitnesstrackingapplication.controller;
 
 import com.dev.marc.fitnesstrackingapplication.utils.SceneSwitcher;
 import com.dev.marc.fitnesstrackingapplication.utils.TabSwitch;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,6 +72,7 @@ public class DashboardController {
 	ReminderController reminderController = new ReminderController();
 	ReportController reportController = new ReportController();
 	SettingsController settingsController = new SettingsController();
+	MapController mapController = new MapController();
 
 	public void setPaneContainer(Pane paneContainer) {this.paneContainer = paneContainer;}
 
@@ -184,5 +187,30 @@ public class DashboardController {
 		SceneSwitcher.switchScene(stage, VIEW_PATH + "Dashboard.fxml",
 				1315, 740, false);
 	}
+
+	@FXML
+	public void Track(ActionEvent event) throws IOException {
+		// Create popping effect
+		ScaleTransition st = new ScaleTransition(Duration.millis(300), paneContainer);
+		st.setFromX(0.8);
+		st.setFromY(0.8);
+		st.setToX(1.0);
+		st.setToY(1.0);
+		st.setCycleCount(1);
+		st.setInterpolator(Interpolator.EASE_OUT);
+		st.play();
+
+		// After the animation, navigate to map
+		st.setOnFinished(e -> {
+			try {
+				mapController.setPaneContainer(paneContainer);
+				mapController.goToMap(event);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		});
+	}
+
+
 
 }
