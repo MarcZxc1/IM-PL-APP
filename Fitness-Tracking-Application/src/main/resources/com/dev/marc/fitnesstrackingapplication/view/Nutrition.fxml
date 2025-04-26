@@ -6,74 +6,105 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="703.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.NutritionController">
    <children>
-      <VBox fx:id="paneContainer" layoutX="-5.0" layoutY="-9.0" prefHeight="700.0" prefWidth="1076.0" spacing="20" style="-fx-padding: 20; -fx-background-color: #E2F1E7;">
+      <Pane prefHeight="703.0" prefWidth="1095.0" styleClass="Nutrition-Page" stylesheets="@../../../../../style.css">
          <children>
-            <Text style="-fx-font-size: 24pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Nutrition" />
-            <VBox spacing="10" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 15;">
+            <Text layoutX="14.0" layoutY="54.0" style="-fx-font-size: 28pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Nutrition Tracker" />
+
+            <TextField fx:id="searchField" layoutX="35.0" layoutY="98.0" prefWidth="400.0" promptText="Search for food (e.g., Chicken Breast)" style="-fx-font-size: 14pt; -fx-padding: 10;" />
+            <Button fx:id="searchButton" layoutX="464.0" layoutY="105.0" style="-fx-background-color: #3B7B7B; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;" text="Search" />
+
+            <Text layoutX="27.0" layoutY="380.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestions" />
+
+            <!-- Meal Suggestion 1 (with flip) -->
+            <Pane fx:id="mealSuggestionFront1" layoutX="27.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion" visible="true">
                <children>
-                  <Text style="-fx-font-size: 18pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Input Meal" />
-                  <GridPane hgap="10" vgap="10">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" prefWidth="100" />
-                        <ColumnConstraints hgrow="ALWAYS" prefWidth="200" />
-                     </columnConstraints>
+                  <Pane fx:id="mealBackPane1" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
-                        <Label style="-fx-text-fill: #1E2F38;" text="Meal Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="mealNameField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-width: 200;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                        <Label style="-fx-text-fill: #1E2F38;" text="Date:" GridPane.rowIndex="1" />
-                        <TextField fx:id="mealDateField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-width: 200;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label style="-fx-text-fill: #1E2F38;" text="Description:" GridPane.rowIndex="2" />
-                        <TextArea fx:id="mealDescriptionField" style="-fx-background-color: white; -fx-border-color: #3B7B7B; -fx-border-radius: 3; -fx-pref-height: 80; -fx-pref-width: 200;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="caloriesLabel" layoutX="30.0" layoutY="50.0" text="Calories: " />
+                        <Label fx:id="carbsLabel" layoutX="30.0" layoutY="80.0" text="Carbs: " />
+                        <Label fx:id="proteinLabel" layoutX="30.0" layoutY="110.0" text="Protein: " />
+                        <Label fx:id="fatLabel" layoutX="30.0" layoutY="140.0" text="Fat: " />
                      </children>
-                     <rowConstraints>
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                     </rowConstraints>
-                  </GridPane>
-                  <Button fx:id="saveButton" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 100; -fx-pref-height: 30; -fx-background-radius: 5;" text="Save" />
+                  </Pane>
+                  <Pane fx:id="mealSuggestion1" prefHeight="264.0" prefWidth="222.0" visible="true">
+                     <children>
+                        <Label fx:id="mealNameLabel" layoutX="44.0" layoutY="14.0" text="Meal Name" />
+                        <ImageView fx:id="mealImage1" fitHeight="192.0" fitWidth="200.0" layoutX="11.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
                </children>
-            </VBox>
-            <VBox spacing="10">
+            </Pane>
+
+            <!-- Meal Suggestion 2 -->
+            <Pane fx:id="mealSuggestionFront2" layoutX="261.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
                <children>
-                  <Text style="-fx-font-size: 18pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestions" />
-                  <HBox spacing="20">
+                  <Pane fx:id="mealBackPane2" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
-                        <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
-                           <children>
-                              <Text style="-fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestion" />
-                              <Text style="-fx-fill: #1E2F38;" text="Chicken Broccoli" />
-                              <ImageView fx:id="mealImage1" fitHeight="150" fitWidth="150" style="-fx-background-color: #e9ecef;" />
-                           </children>
-                        </VBox>
-                        <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
-                           <children>
-                              <Text style="-fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestion" />
-                              <Text style="-fx-fill: #1E2F38;" text="Chicken Breast" />
-                              <ImageView fx:id="mealImage2" fitHeight="150" fitWidth="150" style="-fx-background-color: #e9ecef;" />
-                           </children>
-                        </VBox>
-                        <VBox spacing="5" style="-fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10;">
-                           <children>
-                              <Text style="-fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestion" />
-                              <Text style="-fx-fill: #1E2F38;" text="Dhungani" />
-                              <ImageView fx:id="mealImage3" fitHeight="150" fitWidth="150" style="-fx-background-color: #e9ecef;" />
-                           </children>
-                        </VBox>
+                        <Label fx:id="caloriesLabel2" layoutX="30.0" layoutY="50.0" text="Calories: " />
+                        <Label fx:id="carbsLabel2" layoutX="30.0" layoutY="80.0" text="Carbs: " />
+                        <Label fx:id="proteinLabel2" layoutX="30.0" layoutY="110.0" text="Protein: " />
+                        <Label fx:id="fatLabel2" layoutX="30.0" layoutY="140.0" text="Fat: " />
                      </children>
-                  </HBox>
+                  </Pane>
+                  <Pane fx:id="mealSuggestion2" prefHeight="264.0" prefWidth="222.0" visible="true">
+                     <children>
+                        <Label fx:id="mealNameLabel2" layoutX="80.0" layoutY="14.0" text="Meal Name" />
+                        <ImageView fx:id="mealImage2" fitHeight="192.0" fitWidth="200.0" layoutX="11.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
                </children>
-            </VBox>
+            </Pane>
+
+            <!-- Meal Suggestion 3 -->
+            <Pane fx:id="mealSuggestionFront3" layoutX="499.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
+               <children>
+                  <Pane fx:id="mealBackPane3" prefHeight="264.0" prefWidth="222.0" visible="false">
+                     <children>
+                        <Label fx:id="caloriesLabel3" layoutX="30.0" layoutY="50.0" text="Calories: " />
+                        <Label fx:id="carbsLabel3" layoutX="30.0" layoutY="80.0" text="Carbs: " />
+                        <Label fx:id="proteinLabel3" layoutX="30.0" layoutY="110.0" text="Protein: " />
+                        <Label fx:id="fatLabel3" layoutX="30.0" layoutY="140.0" text="Fat: " />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="mealSuggestion3" prefHeight="264.0" prefWidth="222.0" visible="true">
+                     <children>
+                        <Label fx:id="mealNameLabel3" layoutX="80.0" layoutY="14.0" text="Meal Name" />
+                        <ImageView fx:id="mealImage3" fitHeight="192.0" fitWidth="200.0" layoutX="11.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+
+            <!-- Meal Suggestion 4 -->
+            <Pane fx:id="mealSuggestionFront4" layoutX="737.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
+               <children>
+                  <Pane fx:id="mealBackPane4" prefHeight="264.0" prefWidth="222.0" visible="false">
+                     <children>
+                        <Label fx:id="caloriesLabel4" layoutX="30.0" layoutY="50.0" text="Calories: " />
+                        <Label fx:id="carbsLabel4" layoutX="30.0" layoutY="80.0" text="Carbs: " />
+                        <Label fx:id="proteinLabel4" layoutX="30.0" layoutY="110.0" text="Protein: " />
+                        <Label fx:id="fatLabel4" layoutX="30.0" layoutY="140.0" text="Fat: " />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="mealSuggestion4" prefHeight="264.0" prefWidth="222.0" visible="true">
+                     <children>
+                        <Label fx:id="mealNameLabel4" layoutX="80.0" layoutY="14.0" text="Meal Name" />
+                        <ImageView fx:id="mealImage4" fitHeight="192.0" fitWidth="200.0" layoutX="11.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+
+            <TextArea fx:id="resultArea" layoutX="27.0" layoutY="149.0" prefHeight="200.0" prefWidth="702.0" />
+      
+            <!-- Ingredients area (right side) -->
+            <TextArea fx:id="ingredientsArea" editable="false" layoutX="836.0" layoutY="18.0" prefHeight="264.0" prefWidth="140.0" />
          </children>
-      </VBox>
+      </Pane>
    </children>
 </AnchorPane>

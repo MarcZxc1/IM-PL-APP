@@ -25,11 +25,11 @@
 /*}*/
 
 .label {
-    -fx-font-size: 2rem;
+    -fx-font-size: 13px;
     -fx-width: 100%;
     -fx-white-space: nowrap;
     -fx-overflow: hidden;
-    -fx-border-right: 5px solid;
+    /*-fx-border-style: 10px;*/
     -fx-animation: typing 2.5s steps(22);
     -fx-cursor: .4s step-end infinite alternate;
 }
@@ -39,9 +39,6 @@
         --border-color: transparent;
     }
 }
-
-
-
 
 
 
@@ -175,7 +172,7 @@
 
 .text-field{
     -fx-background-color: transparent;
-    -fx-text-fill: #151515;
+    -fx-text-fill: black;
     -fx-font-size: 20px;
     -fx-border-color: #ECECF0;
     -fx-border-style:  solid;
@@ -224,10 +221,10 @@
 .DBButton6, .DBButton7, .DBButton8, .DBButton9 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-size: 15px;
+    -fx-font-size: 11px;
     -fx-font-weight: normal;
     -fx-border-color: transparent;
-    -fx-border-width: 1.5px;
+    -fx-border-width: 3px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-cursor: hand;
@@ -237,11 +234,26 @@
     -fx-transition: all 0.3s ease-in-out;
 }
 
+.DBButton1 {
+    -fx-background-image: url('assets/DashboardButtons/dashboardd.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    /*-fx-background-position: center-left; !* Align icon to the left *!*/
+    -fx-padding: 0 0 0 40; /* Adjust padding for the icon */
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-border-color: transparent;
+    -fx-alignment: center-left; /* Align content to the left */
+    -fx-text-fill: white; /* Set text color */
+    -fx-font-size: 18px; /* Adjust font size */
+}
+
+
 /* Hover effect */
 .DBButton:hover, .DBButton1:hover, .DBButton2:hover, .DBButton3:hover, .DBButton4:hover,
 .DBButton5:hover, .DBButton6:hover, .DBButton7:hover, .DBButton8:hover, .DBButton9:hover {
     -fx-background-color: rgb(255, 255, 255);
-    -fx-text-fill: #3B7B7B;
+    -fx-text-fill: white;
     /*-fx-border-color: #3B7B7B;*/
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.4, 0, 2);
     -fx-scale-x: 1.05;
@@ -451,7 +463,7 @@
         -fx-background-color: #fff;
         -fx-padding: 20px;
         -fx-border-radius: 10px;
-        -fx-box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+        /*-fx-box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);*/
     }
 
     /* Labels */
@@ -483,10 +495,17 @@
 }
 
 .Nutrition-Page {
+    -fx-background-color:#D7E6DC ;
     }
+.mealsuggestion{
+    -fx-border-style: solid;
+    -fx-border-radius: 10px;
 
+}
 
-
+.buttonnn{
+    -fx-background-color: blue;
+}
 
 
 

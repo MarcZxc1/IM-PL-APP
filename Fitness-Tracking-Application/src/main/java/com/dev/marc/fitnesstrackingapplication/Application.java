@@ -40,5 +40,6 @@ public class Application extends javafx.application.Application {
 		CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
 		launch();
 
+
 	}
 }

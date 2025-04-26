@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1105.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1094.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
 
    <children>
 
