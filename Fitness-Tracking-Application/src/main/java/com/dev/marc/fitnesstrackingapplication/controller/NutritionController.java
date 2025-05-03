@@ -5,7 +5,6 @@ import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -26,23 +25,35 @@ import java.nio.charset.StandardCharsets;
 public class NutritionController {
 
 
-//	@FXML private Label mealNameLabel;
-//	@FXML private TextArea ingredientsArea;
-//	@FXML private Label caloriesLabel;
-//	@FXML private Label proteinLabel;
-//	@FXML private Label carbsLabel;
-//	@FXML private Label fatLabel;
-//	@FXML private TextField mealNameField;
-//	@FXML private TextField mealDateField;
-//	@FXML private TextArea mealDescriptionField;
-//	@FXML private TextField proteinField;
-//	@FXML private TextField caloriesField;
-//	@FXML private Button saveButton;
+	@FXML ComboBox mealTypeComboBox;
 
-	@FXML Label mealNameLabel;
-	@FXML Label mealNameLabe2;
-	@FXML Label mealNameLabe3;
-	@FXML Label mealNameLabe4;
+	@FXML private Label caloriesLabel;
+	@FXML private Label proteinLabel;
+	@FXML private Label carbsLabel;
+	@FXML private Label fatLabel;
+
+	@FXML private Label caloriesLabel2;
+	@FXML private Label proteinLabel2;
+	@FXML private Label carbsLabel2;
+	@FXML private Label fatLabel2;
+
+	@FXML private Label caloriesLabel3;
+	@FXML private Label proteinLabel3;
+	@FXML private Label carbsLabel3;
+	@FXML private Label fatLabel3;
+
+	@FXML private Label caloriesLabel4;
+	@FXML private Label proteinLabel4;
+	@FXML private Label carbsLabel4;
+	@FXML private Label fatLabel4;
+
+
+
+
+	@FXML Label mealNameLabel1;
+	@FXML Label mealNameLabel2;
+	@FXML Label mealNameLabel3;
+	@FXML Label mealNameLabel4;
 
 
 	private boolean isFlipped = false;
@@ -86,6 +97,7 @@ public class NutritionController {
 	@FXML
 	public void initialize() {
 		searchButton.setOnAction(e -> searchFood());
+		mealTypeComboBox.getItems().addAll("bulking", "cutting", "maintenance", "lose weight");
 
 		// Default visibility
 		setInitialPaneState(mealSuggestion1, mealBackPane1);
@@ -120,69 +132,147 @@ public class NutritionController {
 
 
 	private void searchFood() {
-		String base = "http://localhost:8080/api/meals/suggest?ingredient=";
-		String query = URLEncoder.encode(searchField.getText(), StandardCharsets.UTF_8);
+		String ingredient = searchField.getText().trim();
+		String mealType = (String) mealTypeComboBox.getValue(); // Get the selected meal type
 
-		fetchAndDisplayMeal(base + query + "+bulking", mealSuggestion1, mealBackPane1, mealImage1);
-		fetchAndDisplayMeal(base + query + "+cutting", mealSuggestion2, mealBackPane2, mealImage2);
-		fetchAndDisplayMeal(base + query + "+maintenance", mealSuggestion3, mealBackPane3, mealImage3);
-		fetchAndDisplayMeal(base + query + "+lose+weight", mealSuggestion4, mealBackPane4, mealImage4);
+		if (ingredient.isEmpty()) {
+			resultArea.setText("Please enter an ingredient.");
+			return;
+		}
+
+		String url = "http://localhost:8080/api/meals/suggest?ingredient=" + URLEncoder.encode(ingredient, StandardCharsets.UTF_8);
+		if (mealType != null && !mealType.isEmpty()) {
+			url += "&mealType=" + URLEncoder.encode(mealType, StandardCharsets.UTF_8);
+		}
+
+		System.out.println("Encoded URL: " + url);
+		fetchAndDisplayMeals(url);
+
+
+		if (mealType != null && !mealType.isEmpty()) {
+			String encodedMealType = URLEncoder.encode(mealType, StandardCharsets.UTF_8);
+			url += "&mealType=" + encodedMealType;
+		}
+
+		System.out.println("Encoded URL: " + url); // Debug log
+
+		// Call API and display results on 4 panes
+		fetchAndDisplayMeals(url);
+
 	}
 
-	private void fetchAndDisplayMeal(String url, Pane front, Pane back, ImageView imageView) {
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(url))
-				.build();
 
+	private void fetchAndDisplayMeals(String url) { HttpClient client = HttpClient.newHttpClient(); HttpRequest request = HttpRequest.newBuilder() .uri(URI.create(url)) .build();
 		client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
 				.thenApply(HttpResponse::body)
-				.thenAccept(response -> Platform.runLater(() -> displayMealOnPane(response, front, back, imageView)))
+				.thenAccept(response -> Platform.runLater(() -> {
+					try {
+						JSONArray array = new JSONArray(response);
+
+						if (array.length() > 0) displayMealOnPane(String.valueOf(array.getJSONObject(0)), mealSuggestion1, mealBackPane1, mealImage1, mealNameLabel1);
+						if (array.length() > 1) displayMealOnPane(String.valueOf(array.getJSONObject(1)), mealSuggestion2, mealBackPane2, mealImage2, mealNameLabel2);
+						if (array.length() > 2) displayMealOnPane(String.valueOf(array.getJSONObject(2)), mealSuggestion3, mealBackPane3, mealImage3, mealNameLabel3);
+						if (array.length() > 3) displayMealOnPane(String.valueOf(array.getJSONObject(3)), mealSuggestion4, mealBackPane4, mealImage4, mealNameLabel4);
+
+
+						if (array.length() == 0) {
+							resultArea.setText("No meals found.");
+						}
+					} catch (Exception e) {
+						resultArea.setText("Failed to parse meal suggestions.");
+						e.printStackTrace();
+					}
+				}))
 				.exceptionally(ex -> {
 					Platform.runLater(() -> resultArea.setText("Error: " + ex.getMessage()));
 					return null;
 				});
+
 	}
 
-	private void displayMealOnPane(String json, Pane frontPane, Pane backPane, ImageView imageView) {
+
+	private void displayMealOnPane(String json, Pane frontPane, Pane backPane, ImageView imageView, Label mealNameLabel) {
 		try {
+			System.out.println("Raw JSON response: " + json);
+
+			// Safeguard: Ensure the response is a JSON object
+			if (json == null || !json.trim().startsWith("{")) {
+				resultArea.setText("Invalid response from server.");
+				System.err.println("Unexpected response format: " + json);
+				return;
+			}
+
 			JSONObject data = new JSONObject(json);
 
 			String mealName = data.getString("meal");
+			if (mealNameLabel != null) {
+				mealNameLabel.setText(mealName);
+			}
 
-			// Front - Name and Image
-			Label nameLabel = (Label) frontPane.lookup("#mealNameLabel"); // Replace with your actual fx:id if unique
-			if (nameLabel != null) nameLabel.setText("Meal: " + mealName);
+			String fileName = mealName.toLowerCase().replace(" ", "_") + ".jpg";
 
-			String fileName = mealName.toLowerCase().replace(" ", "-") + ".jpg";
-			String imagePath = "/assets/FoodImages/" + fileName;
+
+
+			String imagePath = "/assets/FoodImages/" + fileName ;
+
 			updateMealImage(imageView, imagePath);
 
-			// Back - Ingredients and Nutrition
+
 			TextArea ingredientsArea = (TextArea) backPane.lookup("#ingredientsArea");
-			JSONArray ingredientsArray = data.getJSONArray("ingredients");
-			StringBuilder ingredientText = new StringBuilder();
-			for (int i = 0; i < ingredientsArray.length(); i++) {
-				ingredientText.append("_ ").append(ingredientsArray.getString(i)).append("\n");
+			if (ingredientsArea != null && data.has("ingredients")) {
+				JSONArray ingredientsArray = data.getJSONArray("ingredients");
+				StringBuilder ingredientText = new StringBuilder();
+				for (int i = 0; i < ingredientsArray.length(); i++) {
+					ingredientText.append("_ ").append(ingredientsArray.getString(i)).append("\n");
+				}
+				ingredientsArea.setText(ingredientText.toString());
 			}
-			if (ingredientsArea != null) ingredientsArea.setText(ingredientText.toString());
 
-			JSONObject nutrition = data.getJSONObject("nutrition");
-			Label cal = (Label) backPane.lookup("#caloriesLabel");
-			Label pro = (Label) backPane.lookup("#proteinLabel");
-			Label carbs = (Label) backPane.lookup("#carbsLabel");
-			Label fat = (Label) backPane.lookup("#fatLabel");
+			JSONObject nutrition = data.optJSONObject("nutrition");
+			if (nutrition == null) return;
 
-			if (cal != null) cal.setText("Calories: " + nutrition.getInt("calories") + " kcal");
-			if (pro != null) pro.setText("Protein: " + nutrition.getInt("protein") + " g");
-			if (carbs != null) carbs.setText("Carbs: " + nutrition.optInt("carbohydrates", 0) + " g");
-			if (fat != null) fat.setText("Fat: " + nutrition.optInt("fat", 0) + " g");
+			Label caloriesLabelLocal = null;
+			Label proteinLabelLocal = null;
+			Label carbsLabelLocal = null;
+			Label fatLabelLocal = null;
+
+			if (backPane == mealBackPane1) {
+				caloriesLabelLocal = caloriesLabel;
+				proteinLabelLocal = proteinLabel;
+				carbsLabelLocal = carbsLabel;
+				fatLabelLocal = fatLabel;
+			} else if (backPane == mealBackPane2) {
+				caloriesLabelLocal = caloriesLabel2;
+				proteinLabelLocal = proteinLabel2;
+				carbsLabelLocal = carbsLabel2;
+				fatLabelLocal = fatLabel2;
+			} else if (backPane == mealBackPane3) {
+				caloriesLabelLocal = caloriesLabel3;
+				proteinLabelLocal = proteinLabel3;
+				carbsLabelLocal = carbsLabel3;
+				fatLabelLocal = fatLabel3;
+			} else if (backPane == mealBackPane4) {
+				caloriesLabelLocal = caloriesLabel4;
+				proteinLabelLocal = proteinLabel4;
+				carbsLabelLocal = carbsLabel4;
+				fatLabelLocal = fatLabel4;
+			}
+
+			if (caloriesLabelLocal != null)
+				caloriesLabelLocal.setText("Calories: " + nutrition.optInt("calories", 0) + " kcal");
+			if (proteinLabelLocal != null)
+				proteinLabelLocal.setText("Protein: " + nutrition.optInt("protein", 0) + " g");
+			if (carbsLabelLocal != null)
+				carbsLabelLocal.setText("Carbs: " + nutrition.optInt("carbohydrates", 0) + " g");
+			if (fatLabelLocal != null)
+				fatLabelLocal.setText("Fat: " + nutrition.optInt("fat", 0) + " g");
 
 		} catch (Exception e) {
 			resultArea.setText("Error displaying meal.");
 			e.printStackTrace();
 		}
 	}
+
 
 	private void flipMealPane(Pane front, Pane back) {
 		Pane showing = front.isVisible() ? front : back;
@@ -207,28 +297,6 @@ public class NutritionController {
 		rotateOut.play();
 	}
 
-
-
-
-
-
-
-//	private void saveMeal() {
-//		String mealName = mealNameField.getText();
-//		String mealDate = mealDateField.getText();
-//		String description = mealDescriptionField.getText();
-//		String protein = proteinField.getText();
-//		String calories = caloriesField.getText();
-//
-//		System.out.println("Meal saved: " + mealName);
-//
-//		mealNameField.clear();
-//		mealDateField.clear();
-//		mealDescriptionField.clear();
-//		proteinField.clear();
-//		caloriesField.clear();
-//	}
-
 	public void updateMealImage(ImageView mealImage1, String imagePath) {
 		try {
 			InputStream stream = getClass().getResourceAsStream(imagePath);
@@ -244,5 +312,5 @@ public class NutritionController {
 	}
 
 
-}
 
+}

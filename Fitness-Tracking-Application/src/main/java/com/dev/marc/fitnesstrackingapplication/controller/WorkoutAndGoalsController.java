@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -134,6 +135,25 @@ public class WorkoutAndGoalsController implements Initializable {
 
 //			authenticateUser();
 		});
+
+//		colInstructions.setCellFactory(tc -> {
+//			TableCell<MyModel, String> cell = new TableCell<>() {
+//				private final Text text = new Text();
+//
+//				{
+//					text.wrappingWidthProperty().bind(tc.widthProperty().subtract(16));
+//					setGraphic(text);
+//				}
+//
+//				@Override
+//				protected void updateItem(String item, boolean empty) {
+//					super.updateItem(item, empty);
+//					text.setText(empty || item == null ? "" : item);
+//				}
+//			};
+//			return cell;
+//		});
+
 
 
 
