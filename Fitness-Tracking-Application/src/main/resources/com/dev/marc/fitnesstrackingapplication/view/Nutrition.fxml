@@ -4,24 +4,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="703.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.NutritionController">
+<AnchorPane prefHeight="727.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.NutritionController">
    <children>
-      <Pane prefHeight="703.0" prefWidth="1095.0" styleClass="Nutrition-Page" stylesheets="@../../../../../style.css">
+      <Pane layoutX="4.0" prefHeight="727.0" prefWidth="1071.0" styleClass="Nutrition-Page" stylesheets="@../../../../../style.css">
          <children>
-            <Text layoutX="14.0" layoutY="54.0" style="-fx-font-size: 28pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Nutrition Tracker" />
+            <Pane layoutX="10.0" layoutY="-3.0" opacity="0.34" prefHeight="734.0" prefWidth="1052.0" styleClass="dashbgg" stylesheets="@../../../../../style.css">
+               <effect>
+                  <GaussianBlur />
+               </effect>
+            </Pane>
 
-            <TextField fx:id="searchField" layoutX="35.0" layoutY="98.0" prefWidth="400.0" promptText="Search for food (e.g., Chicken Breast)" style="-fx-font-size: 14pt; -fx-padding: 10;" />
-            <Button fx:id="searchButton" layoutX="464.0" layoutY="105.0" style="-fx-background-color: #3B7B7B; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;" text="Search" />
+            <TextField fx:id="searchField" layoutX="127.0" layoutY="110.0" prefHeight="51.0" prefWidth="284.0" promptText="Search for food (e.g., Chicken Breast)" style="-fx-font-size: 14pt; -fx-padding: 10;" />
+            <Button fx:id="searchButton" layoutX="27.0" layoutY="110.0" prefHeight="50.0" prefWidth="87.0" style="-fx-background-color: #3B7B7B; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;" text="Search" />
 
-            <Text layoutX="27.0" layoutY="380.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestions" />
+            <Text layoutX="27.0" layoutY="413.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-fill: #1E2F38;" text="Meal Suggestions" />
 
             <!-- Meal Suggestion 1 (with flip) -->
-            <Pane fx:id="mealSuggestionFront1" layoutX="27.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion" visible="true">
+            <Pane fx:id="mealSuggestionFront1" layoutX="27.0" layoutY="432.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion" visible="true">
                <children>
                   <Pane fx:id="mealBackPane1" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
@@ -41,7 +48,7 @@
             </Pane>
 
             <!-- Meal Suggestion 2 -->
-            <Pane fx:id="mealSuggestionFront2" layoutX="261.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
+            <Pane fx:id="mealSuggestionFront2" layoutX="261.0" layoutY="432.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
                <children>
                   <Pane fx:id="mealBackPane2" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
@@ -61,7 +68,7 @@
             </Pane>
 
             <!-- Meal Suggestion 3 -->
-            <Pane fx:id="mealSuggestionFront3" layoutX="499.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
+            <Pane fx:id="mealSuggestionFront3" layoutX="499.0" layoutY="432.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
                <children>
                   <Pane fx:id="mealBackPane3" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
@@ -81,7 +88,7 @@
             </Pane>
 
             <!-- Meal Suggestion 4 -->
-            <Pane fx:id="mealSuggestionFront4" layoutX="737.0" layoutY="410.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
+            <Pane fx:id="mealSuggestionFront4" layoutX="737.0" layoutY="432.0" prefHeight="264.0" prefWidth="222.0" styleClass="mealsuggestion">
                <children>
                   <Pane fx:id="mealBackPane4" prefHeight="264.0" prefWidth="222.0" visible="false">
                      <children>
@@ -100,10 +107,18 @@
                </children>
             </Pane>
 
-            <TextArea fx:id="resultArea" layoutX="27.0" layoutY="149.0" prefHeight="200.0" prefWidth="702.0" />
+            <TextArea fx:id="resultArea" layoutX="27.0" layoutY="170.0" prefHeight="203.0" prefWidth="702.0" />
       
             <!-- Ingredients area (right side) -->
-            <TextArea fx:id="ingredientsArea" editable="false" layoutX="836.0" layoutY="18.0" prefHeight="264.0" prefWidth="140.0" />
+            <TextArea fx:id="ingredientsArea" editable="false" layoutX="751.0" layoutY="171.0" prefHeight="203.0" prefWidth="210.0" />
+            <Label fx:id="labell" layoutX="29.0" layoutY="50.0" prefHeight="44.0" prefWidth="423.0" style="-fx-font-size: 30px; -fx-text-fill: #1E2F38; -fx-font-weight: bold;" text="Nutrition Tracker">
+               <font>
+                  <Font size="58.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
          </children>
       </Pane>
    </children>

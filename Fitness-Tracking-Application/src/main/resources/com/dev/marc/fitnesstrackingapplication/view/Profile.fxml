@@ -5,17 +5,25 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="700.0" prefWidth="1094.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+<AnchorPane fx:id="paneContainer" prefHeight="727.0" prefWidth="1077.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
 
    <children>
+      <Pane layoutX="23.0" layoutY="-4.0" opacity="0.34" prefHeight="734.0" prefWidth="1028.0" styleClass="dashbgg" stylesheets="@../../../../../style.css">
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </Pane>
 
       <!-- Profile Card -->
-      <Pane cache="true" layoutX="230.0" layoutY="30.0" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+      <Pane cache="true" layoutX="59.0" layoutY="70.0" prefHeight="236.0" prefWidth="544.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
          <children>
             <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="90.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <!-- Replace with your avatar image -->
@@ -31,7 +39,7 @@
       </Pane>
 
       <!-- Activity Chart (Mocked with Pane for now) -->
-      <Pane layoutX="553.0" layoutY="44.0" prefHeight="200.0" prefWidth="450.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+      <Pane layoutX="628.0" layoutY="68.0" prefHeight="435.0" prefWidth="386.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
          <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="Activity" />
             <Label layoutX="20.0" layoutY="150.0" style="-fx-text-fill: #888;" text="Traveled last month: 50Km" />
@@ -40,7 +48,7 @@
       </Pane>
 
       <!-- Notes Section -->
-      <Pane layoutX="67.0" layoutY="310.0" prefHeight="160.0" prefWidth="400.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+      <Pane layoutX="56.0" layoutY="343.0" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
          <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="Notes" />
             <VBox layoutX="20.0" layoutY="40.0" spacing="10.0">
@@ -54,7 +62,7 @@
       </Pane>
 
       <!-- To-do List -->
-      <Pane layoutX="543.0" layoutY="310.0" prefHeight="160.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
+      <Pane layoutX="397.0" layoutY="343.0" prefHeight="160.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: #DADCE0; -fx-background-radius: 10; -fx-border-radius: 10;">
          <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-font-weight: bold;" text="To-do List" />
             <VBox layoutX="20.0" layoutY="40.0" spacing="8.0">
@@ -65,12 +73,12 @@
                   <CheckBox selected="false" text="Squat (20)" />
                </children>
             </VBox>
-            <Button layoutX="180.0" layoutY="120.0" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-background-radius: 6;" text="See All" />
+            <Button layoutX="146.0" layoutY="122.0" style="-fx-background-color: #639A8F; -fx-text-fill: white; -fx-background-radius: 6;" text="See All" />
          </children>
       </Pane>
 
       <!-- Reminder Table -->
-      <TableView layoutX="67.0" layoutY="506.0" prefHeight="160.0" prefWidth="651.0">
+      <TableView layoutX="56.0" layoutY="532.0" prefHeight="160.0" prefWidth="974.0">
          <columns>
             <TableColumn fx:id="descriptionCol" prefWidth="200.0" text="Description" />
             <TableColumn fx:id="dueCol" prefWidth="150.0" text="Due" />
@@ -78,6 +86,14 @@
             <TableColumn fx:id="statusCol" prefWidth="150.0" text="Status" />
          </columns>
       </TableView>
+      <Label fx:id="labell" layoutX="63.0" layoutY="18.0" prefHeight="44.0" prefWidth="423.0" style="-fx-font-size: 30px; -fx-text-fill: #1E2F38; -fx-font-weight: bold;" text="Profile">
+         <font>
+            <Font size="58.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
 
    </children>
 </AnchorPane>

@@ -4,23 +4,24 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1105.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReminderController">
-
-    <!-- Main Content Area -->
-    <center>
-        <AnchorPane>
+<BorderPane prefHeight="730.0" prefWidth="1110.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ReminderController">
+   <top>
+        <AnchorPane prefHeight="722.0" prefWidth="1110.0" BorderPane.alignment="CENTER">
             <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                <!-- Title -->
-                <Label style="-fx-text-fill: #1E2F38;" text="Reminder">
-                    <font>
-                        <Font name="Segoe UI Bold" size="24" />
-                    </font>
-                </Label>
+            <Label fx:id="labell" prefHeight="44.0" prefWidth="423.0" style="-fx-font-size: 30px; -fx-text-fill: #1E2F38; -fx-font-weight: bold;" text="Reminder">
+               <font>
+                  <Font size="58.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
 
                 <!-- Reminder Form Section -->
                 <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #ffffff; -fx-border-color: #3B7B7B; -fx-border-width: 1; -fx-border-radius: 5;">
@@ -61,5 +62,5 @@
                 </VBox>
             </VBox>
         </AnchorPane>
-    </center>
+   </top>
 </BorderPane>

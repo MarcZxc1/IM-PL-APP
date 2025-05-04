@@ -86,7 +86,7 @@
     -fx-font-weight: normal;
     -fx-border-color: white;
     -fx-border-width: 1.5px;
-    -fx-border-radius: 25px;
+    -fx-border-radius: 15px;
     -fx-background-radius: 25px;
     -fx-cursor: hand;
     -fx-padding: 10px 24px;
@@ -207,66 +207,108 @@
 
 
 .DashboardPane{
-    /*-fx-background-image: url('assets/Dashboard1.jpg');*/
-    -fx-background-color: #3B7B7B;
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-    -fx-alignment: center; /* Center the content */
+    -fx-background-color:  #2C5F63;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-padding: 20px 0;
+}
 
+.dashbgg{
+    -fx-background-color:  #E0E0E0;
+}
+
+.dashboardContent{
+    -fx-background-color: #E2F1E7;
 }
 
 
 .DBButton, .DBButton1, .DBButton2, .DBButton3, .DBButton4, .DBButton5,
 .DBButton6, .DBButton7, .DBButton8, .DBButton9 {
     -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-size: 11px;
-    -fx-font-weight: normal;
-    -fx-border-color: transparent;
-    -fx-border-width: 3px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
+    -fx-text-fill: #bdc3c7;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
     -fx-cursor: hand;
-    -fx-padding: 10px 24px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.3, 0, 2);
-    -fx-background-insets: 0;
-    -fx-transition: all 0.3s ease-in-out;
+    -fx-effect: null;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: transparent;
+    -fx-transition: all 0.3s ease;
 }
 
-.DBButton1 {
-    -fx-background-image: url('assets/DashboardButtons/dashboardd.png');
-    -fx-background-size: contain;
-    -fx-background-repeat: no-repeat;
-    /*-fx-background-position: center-left; !* Align icon to the left *!*/
-    -fx-padding: 0 0 0 40; /* Adjust padding for the icon */
+.Top{
+    -fx-background-color: #387478;
+}
+
+
+/* Navigation Button States */
+.nav-button {
     -fx-background-color: transparent;
-    -fx-border-radius: 0;
-    -fx-border-color: transparent;
-    -fx-alignment: center-left; /* Align content to the left */
-    -fx-text-fill: white; /* Set text color */
-    -fx-font-size: 18px; /* Adjust font size */
+    -fx-text-fill: #bdc3c7;
+    -fx-padding: 12px 20px 12px 45px;
+    -fx-background-image: url('Icons/dashboardICON.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 15px center;
+    -fx-transition: all 0.3s ease;
+}
+
+/* Hover State */
+.nav-button:hover {
+    -fx-text-fill: white;
+    -fx-translate-x: 5px;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    /* Optional: different icon on hover */
+    -fx-background-image: url('Icons/dashboardICON.png');
+}
+
+/* Pressed State (JavaFX uses :pressed instead of :active) */
+.nav-button:pressed {
+    -fx-background-color: rgba(52, 152, 219, 0.2);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Track Button */
+.track-button {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 24px 12px 45px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(59, 130, 246, 0.3), 8, 0, 0, 2);
+    -fx-transition: all 0.2s ease;
+    -fx-background-image: url('Icons/dashboardICON.png');
+    -fx-background-position: 15px center;
+}
+
+.track-button:hover {
+    -fx-background-color: #2563eb;
+    -fx-effect: dropshadow(three-pass-box, rgba(59, 130, 246, 0.5), 12, 0, 0, 4);
+}
+
+.track-button:pressed {
+    -fx-background-color: #1d4ed8;
+    -fx-effect: dropshadow(three-pass-box, rgba(59, 130, 246, 0.2), 4, 0, 0, 1);
 }
 
 
 /* Hover effect */
 .DBButton:hover, .DBButton1:hover, .DBButton2:hover, .DBButton3:hover, .DBButton4:hover,
 .DBButton5:hover, .DBButton6:hover, .DBButton7:hover, .DBButton8:hover, .DBButton9:hover {
-    -fx-background-color: rgb(255, 255, 255);
     -fx-text-fill: white;
-    /*-fx-border-color: #3B7B7B;*/
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.4, 0, 2);
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: #3498db;
+    -fx-translate-x: 5px;
 }
 
 /* Pressed effect */
 .DBButton:pressed, .DBButton1:pressed, .DBButton2:pressed, .DBButton3:pressed, .DBButton4:pressed,
 .DBButton5:pressed, .DBButton6:pressed, .DBButton7:pressed, .DBButton8:pressed, .DBButton9:pressed {
-    -fx-background-color: rgba(59, 123, 123, 0.15);
-    -fx-scale-x: 1.0;
-    -fx-scale-y: 1.0;
-    -fx-transition: all 0.2s ease-in-out;
+    -fx-background-color: rgba(52, 152, 219, 0.2);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
 }
 
 /* Glowing effect */
@@ -291,7 +333,7 @@
 }
 
 .Workout-and-Goals{
-    -fx-background-image: url('assets/workout.jpg');
+    -fx-background-color: #E2F1E7;
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }

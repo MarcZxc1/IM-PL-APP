@@ -1,21 +1,13 @@
 package com.dev.marc.fitnesstrackingapplication.controller;
 
 import com.dev.marc.fitnesstrackingapplication.utils.SceneSwitcher;
-import com.dev.marc.fitnesstrackingapplication.utils.TabSwitch;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
@@ -25,69 +17,45 @@ import java.io.IOException;
 
 public class DashboardController {
 
-	@FXML
-	private ProgressBar progressBar;
-	@FXML
-	private Arc progressArc;
-	@FXML
-	private Label percentageLabel;
+	@FXML private ProgressBar progressBar;
+	@FXML private Arc progressArc;
+	@FXML private Label percentageLabel;
+	@FXML private Button TrackBtn;
+	@FXML private Button WaGBtn;
+	@FXML private Button homeButton;
+	@FXML public Pane paneContainer;
+	@FXML private Label labell;
+	@FXML private Arc progressArc1;
+	@FXML private Arc progressArc2;
+	@FXML private Arc progressArc3;
+	@FXML private Arc progressArc4;
+	@FXML private Label label1;
+	@FXML private Label label2;
+	@FXML private Label label3;
+	@FXML private Label label4;
 
-	@FXML
-	private Button TrackBtn;
-	@FXML
-	private Button WaGBtn;
-	@FXML
-	private Button homeButton;
-
-	@FXML
-	public Pane paneContainer;
-
+	// Controller instances
+	private ProfileController profileController = new ProfileController();
+	private NutritionController nutritionController = new NutritionController();
+	private WorkoutAndGoalsController workoutAndGoalsController = new WorkoutAndGoalsController();
+	private MetricsController metricsController = new MetricsController();
+	private ReminderController reminderController = new ReminderController();
+	private ReportController reportController = new ReportController();
+	private SettingsController settingsController = new SettingsController();
+	private MapController mapController = new MapController();
 
 	private double progress = 0;
-
-	@FXML
-	private Label labell;
-	@FXML
-	private Arc progressArc1;
-	@FXML
-	private Arc progressArc2;
-	@FXML
-	private Arc progressArc3;
-	@FXML
-	private Arc progressArc4;
-
-	@FXML
-	private Label label1;
-	@FXML
-	private Label label2;
-	@FXML
-	private Label label3;
-	@FXML
-	private Label label4;
-
-	ProfileController profileController = new ProfileController();
-	NutritionController nutritionController = new NutritionController();
-	WorkoutAndGoalsController workoutAndGoalsController = new WorkoutAndGoalsController();
-	MetricsController metricsController = new MetricsController();
-	ReminderController reminderController = new ReminderController();
-	ReportController reportController = new ReportController();
-	SettingsController settingsController = new SettingsController();
-	MapController mapController = new MapController();
-
-	public void setPaneContainer(Pane paneContainer) {this.paneContainer = paneContainer;}
-
 	private static final String VIEW_PATH = "/com/dev/marc/fitnesstrackingapplication/view/";
+
+	public void setPaneContainer(Pane paneContainer) {
+		this.paneContainer = paneContainer;
+	}
 
 	public void initialize() {
 		initializeArcs();
-
-		Timeline timeline = new Timeline(
-				new KeyFrame(Duration.seconds(0.05), e -> updateProgress())
-		);
-		timeline.setCycleCount(100);
-		timeline.play();
-
-		applyTypingEffect(labell, "Welcome to Fitness Tracker");
+		setupNavigationHoverEffects();
+		setupProgressAnimation();
+		applySimpleTypingEffect(labell, "Welcome to Fitness Tracker");
 	}
 
 	private void initializeArcs() {
@@ -95,6 +63,28 @@ public class DashboardController {
 		if (progressArc2 != null) progressArc2.setStartAngle(90);
 		if (progressArc3 != null) progressArc3.setStartAngle(90);
 		if (progressArc4 != null) progressArc4.setStartAngle(90);
+	}
+
+	private void setupNavigationHoverEffects() {
+		paneContainer.lookupAll(".nav-button").forEach(node -> {
+			Button button = (Button) node;
+
+			button.setOnMouseEntered(e -> {
+				button.setStyle("-fx-background-color: #e0e0e0; -fx-scale-x: 1.02; -fx-scale-y: 1.02;");
+			});
+
+			button.setOnMouseExited(e -> {
+				button.setStyle("-fx-background-color: transparent; -fx-scale-x: 1.0; -fx-scale-y: 1.0;");
+			});
+		});
+	}
+
+	private void setupProgressAnimation() {
+		Timeline timeline = new Timeline(
+				new KeyFrame(Duration.seconds(0.05), e -> updateProgress())
+		);
+		timeline.setCycleCount(100);
+		timeline.play();
 	}
 
 	private void updateProgress() {
@@ -109,98 +99,155 @@ public class DashboardController {
 	}
 
 	private void updateArc(Arc arc, Label label) {
-		if (arc != null) {
-			arc.setLength(-progress * 3.6);
-		}
-		if (label != null) {
+		if (arc != null && label != null) {
+			double targetLength = -progress * 3.6;
+			arc.setLength(targetLength);
 			label.setText((int) progress + "%");
+
+			// Simple pulse effect for milestones
+			if (progress % 25 == 0) {
+				ScaleTransition st = new ScaleTransition(Duration.millis(200), label);
+				st.setFromX(1.0);
+				st.setFromY(1.0);
+				st.setToX(1.2);
+				st.setToY(1.2);
+				st.setAutoReverse(true);
+				st.setCycleCount(2);
+				st.play();
+			}
 		}
 	}
 
+	private void applySimpleTypingEffect(Label label, String text) {
+		label.setText(""); // Clear initial text
+
+		Timeline timeline = new Timeline();
+		for (int i = 0; i < text.length(); i++) {
+			final int index = i;
+			timeline.getKeyFrames().add(
+					new KeyFrame(Duration.millis(100 * i), e -> {
+						label.setText(text.substring(0, index + 1));
+					})
+			);
+		}
+		timeline.play();
+	}
+
+	// Simplified navigation methods
 	@FXML
 	private void Profile(ActionEvent event) throws IOException {
-		profileController.setPaneContainer(paneContainer);
-		profileController.goToProfile(event);}
+		simpleTransition(() -> {
+			try {
+				profileController.setPaneContainer(paneContainer);
+				profileController.goToProfile(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void Nutrition(ActionEvent event) throws IOException {
-		nutritionController.setPaneContainer(paneContainer);
-		nutritionController.goToNutrition(event);}
+		simpleTransition(() -> {
+			try {
+				nutritionController.setPaneContainer(paneContainer);
+				nutritionController.goToNutrition(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void WorkoutANDGoals(ActionEvent event) throws IOException {
-		workoutAndGoalsController.setPaneContainer(paneContainer);
-		workoutAndGoalsController.goToWorkoutAndGoals(event);}
+		simpleTransition(() -> {
+			try {
+				workoutAndGoalsController.setPaneContainer(paneContainer);
+				workoutAndGoalsController.goToWorkoutAndGoals(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void Metrics(ActionEvent event) throws IOException {
-		metricsController.setPaneContainer(paneContainer);
-		metricsController.goToMetrics(event);}
+		simpleTransition(() -> {
+			try {
+				metricsController.setPaneContainer(paneContainer);
+				metricsController.goToMetrics(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void Reminder(ActionEvent event) throws IOException {
-		reminderController.setPaneContainer(paneContainer);
-		reminderController.goToReminder(event);}
-
+		simpleTransition(() -> {
+			try {
+				reminderController.setPaneContainer(paneContainer);
+				reminderController.goToReminder(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void Report(ActionEvent event) throws IOException {
-		reportController.setPaneContainer(paneContainer);
-		reportController.goToReport(event);}
+		simpleTransition(() -> {
+			try {
+				reportController.setPaneContainer(paneContainer);
+				reportController.goToReport(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
 	@FXML
 	private void Settings(ActionEvent event) throws IOException {
-		settingsController.setPaneContainer(paneContainer);
-		settingsController.goToSettings(event);}
-
-
-
-
-
-
-	private void loadScene(String fxmlPath, ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-		Parent root = loader.load();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(new Scene(root));
-		stage.show();
+		simpleTransition(() -> {
+			try {
+				settingsController.setPaneContainer(paneContainer);
+				settingsController.goToSettings(event);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
-	public static void applyTypingEffect(Label labell, String text) {
-		final StringBuilder displayedText = new StringBuilder();
-		Timeline timeline = new Timeline(
-				new KeyFrame(Duration.millis(100), event -> {
-					if (displayedText.length() < text.length()) {
-						displayedText.append(text.charAt(displayedText.length()));
-						labell.setText(displayedText.toString());
-					}
-				})
-		);
-		timeline.setCycleCount(text.length());
-		timeline.play();
-
+	private void simpleTransition(Runnable transitionAction) {
+		FadeTransition fade = new FadeTransition(Duration.millis(200), paneContainer);
+		fade.setFromValue(1.0);
+		fade.setToValue(0.7);
+		fade.setOnFinished(e -> {
+			transitionAction.run();
+			FadeTransition fadeIn = new FadeTransition(Duration.millis(200), paneContainer);
+			fadeIn.setFromValue(0.7);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+		});
+		fade.play();
 	}
 
 	@FXML
 	public void homeButton(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		SceneSwitcher.switchScene(stage, VIEW_PATH + "Dashboard.fxml",
-				1315, 740, false);
+		SceneSwitcher.switchScene(stage, VIEW_PATH + "Dashboard.fxml", 1315, 740, false);
 	}
 
 	@FXML
 	public void Track(ActionEvent event) throws IOException {
-		// Create popping effect
-		ScaleTransition st = new ScaleTransition(Duration.millis(300), paneContainer);
-		st.setFromX(0.8);
-		st.setFromY(0.8);
-		st.setToX(1.0);
-		st.setToY(1.0);
-		st.setCycleCount(1);
-		st.setInterpolator(Interpolator.EASE_OUT);
-		st.play();
-
-		// After the animation, navigate to map
+		// Simple scale effect
+		ScaleTransition st = new ScaleTransition(Duration.millis(200), paneContainer);
+		st.setFromX(1.0);
+		st.setFromY(1.0);
+		st.setToX(1.05);
+		st.setToY(1.05);
+		st.setAutoReverse(true);
+		st.setCycleCount(2);
 		st.setOnFinished(e -> {
 			try {
 				mapController.setPaneContainer(paneContainer);
@@ -209,8 +256,6 @@ public class DashboardController {
 				ex.printStackTrace();
 			}
 		});
+		st.play();
 	}
-
-
-
 }
