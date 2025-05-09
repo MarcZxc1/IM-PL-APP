@@ -2,6 +2,7 @@ package com.dev.marc.fitnesstrackingapplication.controller;
 
 import com.dev.marc.fitnesstrackingapplication.utils.SceneSwitcher;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,11 +14,14 @@ import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class DashboardController {
 
-	@FXML private ProgressBar progressBar;
 	@FXML private Arc progressArc;
 	@FXML private Label percentageLabel;
 	@FXML private Button TrackBtn;
@@ -42,7 +46,7 @@ public class DashboardController {
 	private ReminderController reminderController = new ReminderController();
 	private ReportController reportController = new ReportController();
 	private SettingsController settingsController = new SettingsController();
-	private MapController mapController = new MapController();
+	private MapController mapController;
 
 	private double progress = 0;
 	private static final String VIEW_PATH = "/com/dev/marc/fitnesstrackingapplication/view/";
@@ -56,6 +60,9 @@ public class DashboardController {
 		setupNavigationHoverEffects();
 		setupProgressAnimation();
 		applySimpleTypingEffect(labell, "Welcome to Fitness Tracker");
+
+		fetchAndDisplaySteps();
+		fetchAndDisplayEnergy();
 	}
 
 	private void initializeArcs() {
@@ -63,6 +70,16 @@ public class DashboardController {
 		if (progressArc2 != null) progressArc2.setStartAngle(90);
 		if (progressArc3 != null) progressArc3.setStartAngle(90);
 		if (progressArc4 != null) progressArc4.setStartAngle(90);
+	}
+
+	@FXML
+	private void connectToFitbit() {
+		try {
+			// Open the user's browser to start the OAuth2 flow
+			java.awt.Desktop.getDesktop().browse(new java.net.URI("http://localhost:8080/fitbit/auth"));
+		} catch (Exception e) {
+			// Handle error
+		}
 	}
 
 	private void setupNavigationHoverEffects() {
@@ -90,7 +107,6 @@ public class DashboardController {
 	private void updateProgress() {
 		if (progress < 100) {
 			progress += 1;
-			progressBar.setProgress(progress / 100);
 			updateArc(progressArc1, label1);
 			updateArc(progressArc2, label2);
 			updateArc(progressArc3, label3);
@@ -240,22 +256,138 @@ public class DashboardController {
 
 	@FXML
 	public void Track(ActionEvent event) throws IOException {
-		// Simple scale effect
-		ScaleTransition st = new ScaleTransition(Duration.millis(200), paneContainer);
-		st.setFromX(1.0);
-		st.setFromY(1.0);
-		st.setToX(1.05);
-		st.setToY(1.05);
-		st.setAutoReverse(true);
-		st.setCycleCount(2);
-		st.setOnFinished(e -> {
+
+		try {
+			mapController.setPaneContainer(paneContainer);
+			mapController.goToMap(event);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+
+	private void fetchAndDisplaySteps() {
+		new Thread(() -> {
 			try {
-				mapController.setPaneContainer(paneContainer);
-				mapController.goToMap(event);
-			} catch (IOException ex) {
-				ex.printStackTrace();
+				// 1. Check login status
+				URL statusUrl = new URL("http://localhost:8080/api/fitbit/status");
+				HttpURLConnection statusConn = (HttpURLConnection) statusUrl.openConnection();
+				statusConn.setRequestMethod("GET");
+				BufferedReader statusBr = new BufferedReader(new InputStreamReader(statusConn.getInputStream(), "utf-8"));
+				StringBuilder statusResponse = new StringBuilder();
+				String statusLine;
+				while ((statusLine = statusBr.readLine()) != null) {
+					statusResponse.append(statusLine.trim());
+				}
+				boolean loggedIn = statusResponse.toString().contains("\"loggedIn\":true");
+
+				if (!loggedIn) {
+					Platform.runLater(() -> {
+						label3.setText("0 steps");
+						progressArc3.setLength(0);
+					});
+					return;
+				}
+
+				// 2. If logged in, fetch steps
+				String accessToken = "USER_ACCESS_TOKEN"; // Retrieve from user/session
+				String date = java.time.LocalDate.now().toString();
+				URL url = new URL("http://localhost:8080/api/fitbit/steps?accessToken=" + accessToken + "&date=" + date);
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+				StringBuilder response = new StringBuilder();
+				String responseLine;
+				while ((responseLine = br.readLine()) != null) {
+					response.append(responseLine.trim());
+				}
+
+				String steps = parseStepsFromJson(response.toString());
+				Platform.runLater(() -> {
+					label3.setText(steps + " steps");
+					double progress = Math.min(Double.parseDouble(steps) / 10000.0, 1.0);
+					progressArc3.setLength(-progress * 360);
+				});
+			} catch (Exception e) {
+				Platform.runLater(() -> {
+					label3.setText("0 steps");
+					progressArc3.setLength(0);
+				});
 			}
-		});
-		st.play();
+		}).start();
+	}
+
+	private void fetchAndDisplayEnergy() {
+		new Thread(() -> {
+			try {
+				// 1. Check login status
+				URL statusUrl = new URL("http://localhost:8080/api/fitbit/status");
+				HttpURLConnection statusConn = (HttpURLConnection) statusUrl.openConnection();
+				statusConn.setRequestMethod("GET");
+				BufferedReader statusBr = new BufferedReader(new InputStreamReader(statusConn.getInputStream(), "utf-8"));
+				StringBuilder statusResponse = new StringBuilder();
+				String statusLine;
+				while ((statusLine = statusBr.readLine()) != null) {
+					statusResponse.append(statusLine.trim());
+				}
+				boolean loggedIn = statusResponse.toString().contains("\"loggedIn\":true");
+
+				if (!loggedIn) {
+					Platform.runLater(() -> {
+						label1.setText("0 kcal");
+						progressArc1.setLength(0);
+					});
+					return;
+				}
+
+				// 2. If logged in, fetch energy
+				String accessToken = "USER_ACCESS_TOKEN"; // Retrieve from user/session
+				String date = java.time.LocalDate.now().toString();
+				URL url = new URL("http://localhost:8080/api/fitbit/energy?accessToken=" + accessToken + "&date=" + date);
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+				StringBuilder response = new StringBuilder();
+				String responseLine;
+				while ((responseLine = br.readLine()) != null) {
+					response.append(responseLine.trim());
+				}
+
+				String calories = parseCaloriesFromJson(response.toString());
+				Platform.runLater(() -> {
+					label1.setText(calories + " kcal");
+					double progress = Math.min(Double.parseDouble(calories) / 2000.0, 1.0);
+					progressArc1.setLength(-progress * 360);
+				});
+			} catch (Exception e) {
+				Platform.runLater(() -> {
+					label1.setText("0 kcal");
+					progressArc1.setLength(0);
+				});
+			}
+		}).start();
+	}
+
+	// JSON parsing helpers (use org.json or similar)
+	private String parseStepsFromJson(String json) {
+    	org.json.JSONObject obj = new org.json.JSONObject(json);
+		org.json.JSONArray activities = obj.getJSONArray("activities-steps");
+    if (activities.length() > 0) {
+        org.json.JSONObject day = activities.getJSONObject(0);
+        return day.getString("value");
+    }
+    return "0";
+}
+
+	private String parseCaloriesFromJson(String json) {
+    org.json.JSONObject obj = new org.json.JSONObject(json);
+    org.json.JSONArray activities = obj.getJSONArray("activities-calories");
+    if (activities.length() > 0) {
+        org.json.JSONObject day = activities.getJSONObject(0);
+        return day.getString("value");
+    }
+    return "0";
 	}
 }

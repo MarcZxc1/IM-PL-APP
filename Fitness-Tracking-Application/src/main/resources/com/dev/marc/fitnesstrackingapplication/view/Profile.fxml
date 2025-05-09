@@ -6,21 +6,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneContainer" prefHeight="727.0" prefWidth="1077.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
+<AnchorPane fx:id="paneContainer" prefHeight="726.0" prefWidth="951.0" style="-fx-background-color: #E2F1E7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.ProfileController">
 
    <children>
-      <Pane layoutX="23.0" layoutY="-4.0" opacity="0.34" prefHeight="734.0" prefWidth="1028.0" styleClass="dashbgg" stylesheets="@../../../../../style.css">
-         <effect>
-            <GaussianBlur />
-         </effect>
-      </Pane>
 
       <!-- Profile Card -->
       <Pane cache="true" layoutX="59.0" layoutY="70.0" prefHeight="236.0" prefWidth="544.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">

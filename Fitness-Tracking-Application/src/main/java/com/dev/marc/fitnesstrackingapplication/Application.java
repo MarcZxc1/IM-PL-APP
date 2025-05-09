@@ -23,7 +23,7 @@ public class Application extends javafx.application.Application {
 		try {
 
 			Parent root = FXMLLoader.load(getClass().getResource(DASHBOARD));
-			Scene scene = new Scene(root);
+			Scene scene = new Scene(root, 1300, 700);
 			stage.setTitle("Fitness Tracker");
 			Image icon = new Image(getClass().getResourceAsStream("/assets/dumbell.png"));
 			stage.getIcons().add(icon);

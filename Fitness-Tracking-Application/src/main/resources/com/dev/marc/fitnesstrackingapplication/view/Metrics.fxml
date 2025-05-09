@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="metricsPane" prefHeight="730.0" prefWidth="1111.0" style="-fx-background-color: #E6F2EF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.MetricsController">
+<AnchorPane fx:id="metricsPane" prefHeight="730.0" prefWidth="951.0" style="-fx-background-color: #E6F2EF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.marc.fitnesstrackingapplication.controller.MetricsController">
 
     <!-- BMI Section Label -->
     <Label layoutX="14.0" layoutY="14.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="BMI Calculator" />
 
     <!-- BMI Calculator Box -->
-    <Pane layoutX="14.0" layoutY="53.0" prefHeight="300.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="14.0" layoutY="53.0" prefHeight="280.0" prefWidth="504.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
             <Label layoutX="57.0" layoutY="67.0" style="-fx-text-fill: white;" text="Age:" />
@@ -45,7 +45,7 @@
     <Label layoutX="27.0" layoutY="365.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Ideal Weight Calculator" />
 
     <!-- Ideal Weight Calculator Box -->
-    <Pane layoutX="21.0" layoutY="408.0" prefHeight="280.0" prefWidth="550.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="21.0" layoutY="408.0" prefHeight="252.0" prefWidth="492.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
             <Label layoutX="63.0" layoutY="65.0" style="-fx-text-fill: white;" text="Age:" />
@@ -64,18 +64,18 @@
             <Button fx:id="calculateIdealWeightButton" layoutX="192.0" layoutY="151.0" prefHeight="30.0" prefWidth="243.0" text="Calculate Ideal Weight" />
             <Label layoutX="84.0" layoutY="222.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Result:" />
             <Label fx:id="idealWeightResultLabel" layoutX="270.0" layoutY="120.0" style="-fx-text-fill: white;" text="" />
-            <TextArea fx:id="idealWeightResultArea" editable="false" layoutX="143.0" layoutY="195.0" prefHeight="70.0" prefWidth="331.0" wrapText="true" />
+            <TextArea fx:id="idealWeightResultArea" editable="false" layoutX="128.0" layoutY="187.0" prefHeight="70.0" prefWidth="331.0" wrapText="true" />
         </children>
     </Pane>
 
     <!-- Protein Calculator Box -->
-    <Pane layoutX="585.0" layoutY="53.0" prefHeight="638.0" prefWidth="496.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
+    <Pane layoutX="530.0" layoutY="53.0" prefHeight="608.0" prefWidth="417.0" style="-fx-background-color: #639A8F; -fx-background-radius: 15;">
         <children>
             <Label layoutX="20.0" layoutY="10.0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="METRICS UNIT" />
-            <Label layoutX="40.0" layoutY="63.0" style="-fx-text-fill: white;" text="Age:" />
-            <TextField fx:id="ageFieldProtein" layoutX="135.0" layoutY="57.0" prefWidth="100.0" />
-            <Label layoutX="285.0" layoutY="63.0" style="-fx-text-fill: white;" text="Gender:" />
-            <ComboBox fx:id="genderComboBoxProtein" layoutX="376.0" layoutY="57.0" prefWidth="100.0">
+            <Label layoutX="20.0" layoutY="63.0" style="-fx-text-fill: white;" text="Age:" />
+            <TextField fx:id="ageFieldProtein" layoutX="89.0" layoutY="59.0" prefWidth="100.0" />
+            <Label layoutX="217.0" layoutY="63.0" style="-fx-text-fill: white;" text="Gender:" />
+            <ComboBox fx:id="genderComboBoxProtein" layoutX="288.0" layoutY="59.0" prefWidth="100.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Male" />
@@ -83,12 +83,12 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Label layoutX="39.0" layoutY="105.0" style="-fx-text-fill: white;" text="Height (cm):" />
-            <TextField fx:id="heightFieldProtein" layoutX="135.0" layoutY="101.0" prefWidth="100.0" />
-            <Label layoutX="285.0" layoutY="105.0" style="-fx-text-fill: white;" text="Weight (kg):" />
-            <TextField fx:id="weightFieldProtein" layoutX="376.0" layoutY="101.0" prefWidth="100.0" />
-            <Label layoutX="44.0" layoutY="162.0" style="-fx-text-fill: white;" text="Activity:" />
-            <ComboBox fx:id="activityComboBoxProtein" layoutX="135.0" layoutY="158.0" prefWidth="320.0">
+            <Label layoutX="18.0" layoutY="105.0" style="-fx-text-fill: white;" text="Height (cm):" />
+            <TextField fx:id="heightFieldProtein" layoutX="89.0" layoutY="101.0" prefWidth="100.0" />
+            <Label layoutX="217.0" layoutY="105.0" style="-fx-text-fill: white;" text="Weight (kg):" />
+            <TextField fx:id="weightFieldProtein" layoutX="288.0" layoutY="101.0" prefWidth="100.0" />
+            <Label layoutX="23.0" layoutY="162.0" style="-fx-text-fill: white;" text="Activity:" />
+            <ComboBox fx:id="activityComboBoxProtein" layoutX="78.0" layoutY="158.0" prefWidth="320.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Sedentary: Little or no exercise" />
@@ -100,13 +100,13 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button fx:id="calculateProteinButton" layoutX="209.0" layoutY="207.0" prefHeight="30.0" prefWidth="189.0" text="Calculate Protein" />
-            <Label layoutX="45.0" layoutY="282.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Result:" />
+            <Button fx:id="calculateProteinButton" layoutX="139.0" layoutY="201.0" prefHeight="30.0" prefWidth="189.0" text="Calculate Protein" />
+            <Label layoutX="12.0" layoutY="283.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Result:" />
             <Label fx:id="proteinResultLabel" layoutX="270.0" layoutY="170.0" style="-fx-text-fill: white;" text="" />
-            <TextArea fx:id="proteinResultArea" editable="false" layoutX="108.0" layoutY="260.0" prefHeight="60.0" prefWidth="391.0" wrapText="true" />
+            <TextArea fx:id="proteinResultArea" editable="false" layoutX="54.0" layoutY="262.0" prefHeight="60.0" prefWidth="310.0" wrapText="true" />
         </children>
     </Pane>
 
     <!-- Protein Calculator Section Label -->
-    <Label layoutX="585.0" layoutY="14.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Protein Calculator" />
+    <Label layoutX="611.0" layoutY="14.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Protein Calculator" />
 </AnchorPane>
